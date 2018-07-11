@@ -93,8 +93,11 @@
 	min-height: 210px;
 }
 .ui.right.labeled.left.icon.input{
-	margin-top: 30px;
+	margin-top: 8px;
 	min-width: 316px;
+}
+.ui.right.floated.blue.button{
+	margin-top: 8px;
 }
 .ui.right.labeled.left.icon.input .ui.tag.label{
 	min-width: 112px;

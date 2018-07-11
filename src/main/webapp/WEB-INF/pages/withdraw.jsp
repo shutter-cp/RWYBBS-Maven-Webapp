@@ -84,8 +84,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			<div class="thirteen wide column">
 				<div class="ui segment center aligned raised raised">
 					<div class="main-in">
-						<samp class="uid">充值账号：${username.getUname()}</samp>
-						<samp class="uid">余额：${username.getTakegold()}</samp>
+						<samp class="uid">提现账号：${username.getUname()}</samp>
+						<samp class="uid">U币：${username.getTakegold()}</samp>
 						<h4 class="ui horizontal divider header">
 							<i class="bitcoin icon"></i> 提现
 						</h4>
@@ -102,16 +102,23 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 							<div class="ten wide column">
 								<div class="ui segment aligned raised  ">
 									<div class="ui right labeled left icon input">
+										<i class="unlock alternate icon"></i> <input type="text" id="moneyId"
+											v-model="moneys" placeholder="密码" value=""> <a
+											class="ui tag label">账户密码</a>
+									</div>
+								
+									<div class="ui right labeled left icon input">
 										<i class="credit card alternative icon"></i> <input
 											type="text" placeholder="支付宝账号" value=""> <a
 											class="ui tag label">支付宝账号 </a>
 									</div>
+									
 									<div class="ui right labeled left icon input">
 										<i class="yen icon"></i> <input type="text" id="moneyId"
 											v-model="moneys" placeholder="提现金额" value=""> <a
 											class="ui tag label">可提{{'${username.getTakegold()}'/10-moneys}}</a>
 									</div>
-
+									<button class="ui right floated blue button">提交</button>
 								</div>
 							</div>
 						</div>
