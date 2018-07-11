@@ -86,7 +86,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					<div class="ui segment center aligned raised raised">
 						<div class="main-in">
 							<samp class="uid">充值账号：${username.getUname()}</samp>
-							<samp class="uid">余额：${username.getTakegold()}</samp>
+							<samp class="uid">U币：${username.getTakegold()}</samp>
 							<h4 class="ui horizontal divider header">
 								<i class="bitcoin icon"></i>
 								 数额 
