@@ -102,8 +102,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 							<div class="ten wide column">
 								<div class="ui segment aligned raised  ">
 									<div class="ui right labeled left icon input">
-										<i class="unlock alternate icon"></i> <input type="text" id="moneyId"
-											v-model="moneys" placeholder="密码" value=""> <a
+										<i class="unlock alternate icon"></i> <input type="password" 
+											 placeholder="密码" value=""> <a
 											class="ui tag label">账户密码</a>
 									</div>
 								
@@ -163,7 +163,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				},
 				watch:{
 					moneys: function(){
-						if(${username.getTakegold()}-this.moneys<0){
+						if(${username.getTakegold()}/10-this.moneys<0){
 							alert('超出额度');
 							$('#moneyId').val(0);
 						}
