@@ -43,4 +43,17 @@ public class TestWeb {
 		System.out.println(1);
 		return andView;
 	}
+	@RequestMapping("/paytest")
+	public ModelAndView test1(){
+		ModelAndView andView = new ModelAndView();
+		andView.setViewName("pay");
+		return andView;
+	}
+	@RequestMapping("/withdrawtest")
+	public ModelAndView test2(){
+		ModelAndView andView = new ModelAndView();
+		andView.setViewName("withdraw");
+		return andView;
+	}
+	
 }

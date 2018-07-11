@@ -4,7 +4,7 @@
 <mapper namespace="com.rwybbs.dao.TestDao">
 
 	
-	<select id="test" resultType="com.rwybbs.bean.TestUser">
+	<select id="test"   resultType="com.rwybbs.bean.TestUser">
 		SELECT
 			id,username,password
 		FROM
