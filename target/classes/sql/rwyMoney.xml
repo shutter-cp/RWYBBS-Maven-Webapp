@@ -1,14 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
  <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"   
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.rwybbs.dao.TestDao">
+<mapper namespace="com.rwybbs.dao.RwyMoneyDo">
 
 	
-	<select id="test"   resultType="com.rwybbs.bean.TestUser">
+	<select id="money"  parameterType="String"  resultType="com.rwybbs.bean.MoneyUser">
 		SELECT
-			id,username,password
+			uname,takegold
 		FROM
-			testuser
+			users
+		WHERE
+			uname = #{username}
 	</select>
 	
 </mapper>  
