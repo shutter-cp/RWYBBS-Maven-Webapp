@@ -48,4 +48,24 @@ public class RwyMoneyWeb {
 		
 		return andView;
 	}
+	
+	@RequestMapping("/withdraw")
+	public ModelAndView initWithdraw(
+			@RequestParam("username") String username){
+		ModelAndView andView = new ModelAndView();
+		
+		List<MoneyUser> user = rwyMoneyService.MoneyService(username);
+		if (user==null) {
+			andView.setViewName("404");
+			return andView;
+		}
+		andView.setViewName("withdraw");
+		andView.addObject("username", user.get(0));
+		System.out.println("123");
+		return andView;
+	}
+
+
 }
+
+
