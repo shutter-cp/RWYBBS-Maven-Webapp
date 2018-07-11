@@ -49,7 +49,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			<div class="ui text menu title-main-right">
 				<div class="right item">
 					<a href="#">
-						<div class="but">username</div>
+						<div class="but">${username.getUname()}</div>
 					</a>
 				</div>
 				<div class="right item but">
@@ -84,8 +84,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			<div class="thirteen wide column">
 				<div class="ui segment center aligned raised raised">
 					<div class="main-in">
-						<samp class="uid">充值账号：username</samp>
-						<samp class="uid">余额：username</samp>
+						<samp class="uid">充值账号：${username.getUname()}</samp>
+						<samp class="uid">余额：${username.getTakegold()}</samp>
 						<h4 class="ui horizontal divider header">
 							<i class="bitcoin icon"></i> 提现
 						</h4>
@@ -109,7 +109,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 									<div class="ui right labeled left icon input">
 										<i class="yen icon"></i> <input type="text" id="moneyId"
 											v-model="moneys" placeholder="提现金额" value=""> <a
-											class="ui tag label">可提{{1000-moneys}}</a>
+											class="ui tag label">可提{{'${username.getTakegold()}'/10-moneys}}</a>
 									</div>
 
 								</div>
@@ -156,7 +156,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				},
 				watch:{
 					moneys: function(){
-						if(1000-this.moneys<0){
+						if(${username.getTakegold()}-this.moneys<0){
 							alert('超出额度');
 							$('#moneyId').val(0);
 						}
