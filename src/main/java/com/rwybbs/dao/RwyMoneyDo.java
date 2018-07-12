@@ -11,6 +11,7 @@ package com.rwybbs.dao;
 import java.util.List;
 
 import com.rwybbs.bean.MoneyUser;
+import com.rwybbs.bean.UserAndPassword;
 
 /**
  * 
@@ -32,5 +33,5 @@ public interface RwyMoneyDo {
 	 * @exception 
 	 * @since  1.0.0
 	 */
-	public List<MoneyUser> money(String username);
+	public List<MoneyUser> money(UserAndPassword user);
 }

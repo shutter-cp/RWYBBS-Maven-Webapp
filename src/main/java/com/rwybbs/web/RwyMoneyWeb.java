@@ -35,10 +35,11 @@ public class RwyMoneyWeb {
 	
 	@RequestMapping("/pay")
 	public ModelAndView intoPay(
-			@RequestParam("username") String username){
+			@RequestParam("username") String username,			
+				@RequestParam("password") String password){
 		ModelAndView andView = new ModelAndView();
 		
-		List<MoneyUser> user = rwyMoneyService.MoneyService(username);
+		List<MoneyUser> user = rwyMoneyService.MoneyService(username,password);
 		if (user==null) {
 			andView.setViewName("404");
 			return andView;
@@ -51,17 +52,17 @@ public class RwyMoneyWeb {
 	
 	@RequestMapping("/withdraw")
 	public ModelAndView initWithdraw(
-			@RequestParam("username") String username){
-		ModelAndView andView = new ModelAndView();
+			@RequestParam("username") String username,			
+				@RequestParam("password") String password){
+		ModelAndView andView = new ModelAndView("redirect:/404.htm");
 		
-		List<MoneyUser> user = rwyMoneyService.MoneyService(username);
+		List<MoneyUser> user = rwyMoneyService.MoneyService(username,password);
 		if (user==null) {
 			andView.setViewName("404");
 			return andView;
 		}
 		andView.setViewName("withdraw");
 		andView.addObject("username", user.get(0));
-		System.out.println("123");
 		return andView;
 	}
 

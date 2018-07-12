@@ -1,0 +1,85 @@
+/*top*/
+#box{
+	background: #EFEFEF;
+}
+.ui.segment.fixed.basic.menu{
+	background: #363840;
+	height: 50px;
+}
+.title-main{
+	width: 1090px;
+	color: white;
+	margin: 0 auto;
+}
+.title-main-in{
+	margin: 0 auto;
+	width: 100px;
+	font-size: 24px;
+}
+
+.ui.image.title-main-left{
+	float: left;
+	margin-top: -10px;
+}
+.ui.image.title-main-left>a>img{
+	height: 40px;
+}
+.ui.text.menu.title-main-right{
+	float: right;
+	margin-top: -30px;
+}
+.ui.text.menu.title-main-right a{
+	color: #c0c0c0;
+}
+.but{
+	margin-top: -10px;
+	background: #363840;
+	height: 50px;
+	min-width: 58px;
+	text-align: center;
+	color: #c0c0c0;
+}
+.but{
+	line-height: 50px;
+	
+}
+.but:hover{
+	background: #5F9EA0;
+	height: 50px;
+	min-width: 58px;
+	text-align: center;
+	color: white;
+}
+.ui.text.menu.title-main-right a:hover{
+	color: white;
+}
+/*主体*/
+.ui.segments.basic.vertical.main{
+	clear:both;
+	max-width: 1200px;
+	margin: 0 auto;
+	margin-top: 50px;
+}
+.ui.teal.button{
+	margin-top: 10px;
+	float: right;
+}
+
+
+
+/*脚部*/
+.ui.segment.basic.vertical{
+	margin: 0 auto;
+	margin-top: 50px;
+	width: 80%;
+}
+.foot.menu{
+	color: #aaa;
+}
+.ui.image.foots>img{
+	height: 40px;
+}
+.rights{
+	margin-top: 60px;
+	float: right;
+}
