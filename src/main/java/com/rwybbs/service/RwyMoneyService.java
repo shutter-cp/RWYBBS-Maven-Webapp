@@ -14,6 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.rwybbs.bean.MoneyUser;
+import com.rwybbs.bean.UserAndPassword;
 import com.rwybbs.dao.RwyMoneyDo;
 
 /**
@@ -29,8 +30,11 @@ public class RwyMoneyService {
 	@Autowired
 	private RwyMoneyDo rwyMoneyDo;
 	
-	public List<MoneyUser> MoneyService(String username){
-		List<MoneyUser> userList = rwyMoneyDo.money(username);
+	public List<MoneyUser> MoneyService(String username,String password){
+		UserAndPassword andPassword = new UserAndPassword();
+		andPassword.setPassword(password);
+		andPassword.setUsername(username);
+		List<MoneyUser> userList = rwyMoneyDo.money(andPassword);
 		if (userList.size()==0) {
 			return null;
 		}
