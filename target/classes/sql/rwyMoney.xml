@@ -4,13 +4,14 @@
 <mapper namespace="com.rwybbs.dao.RwyMoneyDo">
 
 	
-	<select id="money"  parameterType="String"  resultType="com.rwybbs.bean.MoneyUser">
+	<select id="money"  parameterType="com.rwybbs.bean.UserAndPassword"  resultType="com.rwybbs.bean.MoneyUser">
 		SELECT
 			uname,takegold
 		FROM
 			users
 		WHERE
-			uname = #{username}
+			uname = #{username} and
+			upassword = #{password}
 	</select>
 	
 </mapper>  

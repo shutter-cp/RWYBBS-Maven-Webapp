@@ -29,6 +29,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	  <h1>${user.getUsername() }</h1>
 	  <h1>${user.getPassword() }</h1>
   </c:forEach>
+  <form action="${basePath}/testForm">
+  	<input type="text" name="username">
+  	<input type="submit" value="submit">
+  </form>
     This is my JSP page. <br>
   </body>
 </html>
