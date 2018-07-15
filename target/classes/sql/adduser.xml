@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+ <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"   
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.rwybbs.dao.AddUserDao">
+
+	<!-- 原来的取值 -->
+	<select id="getRwyUser"  parameterType="String"  resultType="com.rwybbs.bean.RwyUser">
+		SELECT
+			uid,
+			uname,
+			upassword,
+			umailbox,
+			phone_number,
+			takegold,
+			createdate,
+			upicture
+		FROM
+			users
+		WHERE
+			uname = #{username}
+	</select>
+	
+	
+	<!-- 第一次进博客录入 -->
+	<insert id="addUser" parameterType="com.rwybbs.bean.BbsUser" flushCache="true">  
+			INSERT INTO 
+				bbsuser (
+					UID, 
+					UName,
+					UPassword, 
+					UEmail, 
+					UBirthady, 
+					USex, 
+					UHead, 
+					USatement, 
+					URegDate, 
+					UState, 
+					UPoint, 
+					UIsSectioner
+				) 
+			VALUES( 
+					#{uid }, 
+					#{uname }, 
+					#{ upassword}, 
+					#{uemail },
+					#{ubirthday }, 
+					#{usex }, 
+					#{ uhead}, 
+					#{ usatement},
+					#{ uregDate}, 
+					#{ ustate}, 
+					#{ upoint}, 
+					#{ uisSectioner} 
+				);
+	</insert>  
+	
+</mapper>  

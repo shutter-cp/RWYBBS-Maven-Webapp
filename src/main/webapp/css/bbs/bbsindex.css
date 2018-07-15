@@ -2,6 +2,10 @@
 #box{
 	background: #EFEFEF;
 }
+.ui.divider>a{
+	#c0c0c0;
+}
+
 .ui.segment.fixed.basic.menu{
 	background: #363840;
 	height: 50px;

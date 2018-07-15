@@ -33,13 +33,24 @@ public class RwyMoneyWeb {
 	@Autowired
 	private RwyMoneyService rwyMoneyService;
 	
+	/**
+	 * 从原来的项目跳转到此项目的支付页面
+	 * 方法名：intoPay
+	 * 创建人：chenPeng
+	 * 时间：2018年7月13日-上午10:31:06 
+	 * 手机:17673111810
+	 * @param username
+	 * @param password
+	 * @return ModelAndView
+	 * @exception 
+	 * @since  1.0.0
+	 */
 	@RequestMapping("/pay")
 	public ModelAndView intoPay(
-			@RequestParam("username") String username,			
-				@RequestParam("password") String password){
+			@RequestParam("username") String username){
 		ModelAndView andView = new ModelAndView();
 		
-		List<MoneyUser> user = rwyMoneyService.MoneyService(username,password);
+		List<MoneyUser> user = rwyMoneyService.MoneyService(username);
 		if (user==null) {
 			andView.setViewName("404");
 			return andView;
@@ -50,13 +61,24 @@ public class RwyMoneyWeb {
 		return andView;
 	}
 	
+	/**
+	 * 从原来的项目跳转到此项的提现页面
+	 * 方法名：initWithdraw
+	 * 创建人：lxf
+	 * 时间：2018年7月13日-上午10:31:36 
+	 * 手机:17673111810
+	 * @param username
+	 * @param password
+	 * @return ModelAndView
+	 * @exception 
+	 * @since  1.0.0
+	 */
 	@RequestMapping("/withdraw")
 	public ModelAndView initWithdraw(
-			@RequestParam("username") String username,			
-				@RequestParam("password") String password){
+			@RequestParam("username") String username){
 		ModelAndView andView = new ModelAndView("redirect:/404.htm");
 		
-		List<MoneyUser> user = rwyMoneyService.MoneyService(username,password);
+		List<MoneyUser> user = rwyMoneyService.MoneyService(username);
 		if (user==null) {
 			andView.setViewName("404");
 			return andView;
@@ -65,7 +87,7 @@ public class RwyMoneyWeb {
 		andView.addObject("username", user.get(0));
 		return andView;
 	}
-
+	
 
 }
 

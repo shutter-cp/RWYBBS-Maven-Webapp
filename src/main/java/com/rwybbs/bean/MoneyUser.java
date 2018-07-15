@@ -9,7 +9,7 @@
 package com.rwybbs.bean;
 
 /**
- * 
+ * 老项目跳转过来的
  * MoneyUser
  * 创建人:chenPeng
  * 时间：2018年7月11日-上午10:43:03 

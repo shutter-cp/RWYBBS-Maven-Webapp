@@ -9,7 +9,7 @@
 package com.rwybbs.bean;
 
 /**
- * 
+ * 用户名和密码
  * UserAndPassword
  * 创建人:chenPeng
  * 时间：2018年7月11日-下午5:13:04 

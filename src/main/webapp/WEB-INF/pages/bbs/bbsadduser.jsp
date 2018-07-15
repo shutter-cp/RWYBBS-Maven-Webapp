@@ -45,7 +45,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					<div class="right item">
 						<a href="#">
 							<div class="but">
-								username
+								${user.getUname()}
 							</div>
 						</a>
 					</div>
@@ -62,90 +62,90 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		<!--  ==========  -->
 		<!--  =   主体      =  -->
 		<!--  ==========  -->
-		<div class="ui basic segment vertical main">
-			<div class="ui raised very padded segment">
-				<h1 class="ui header"><i class="ui red icon write square"></i>请完善你的个人信息</h1>
-				<!--不可编辑的信息-->
-				<div class="ui form">
-					<div class="two fields">
-						<div class="disabled field">
-							<label>First Name</label>
-							<input tabindex="-1" disabled="" type="text" placeholder="Read Only" value="">
-						</div>
-						<div class="disabled field">
-							<label>Last Name</label>
-							<input tabindex="-1" disabled="" type="text" placeholder="Disabled" value="">
-						</div>
-					</div>
-				</div><br />
-				
-				<div class="ui form">
-					<div class="two fields">
-						<div class="disabled field">
-							<label>First Name</label>
-							<input tabindex="-1" disabled="" type="text" placeholder="Read Only" value="">
-						</div>
-						<div class="disabled field">
-							<label>Last Name</label>
-							<input tabindex="-1" disabled="" type="text" placeholder="Disabled" value="">
-						</div>
-					</div>
-				</div><br />
-				
-				<div class="ui form">
-					<div class="two fields">
-						<div class="disabled field">
-							<label>First Name</label>
-							<input tabindex="-1" disabled="" type="text" placeholder="Read Only" value="">
-						</div>
-						<div class="disabled field">
-							<label>Last Name</label>
-							<input tabindex="-1" disabled="" type="text" placeholder="Disabled" value="">
-						</div>
-					</div>
-				</div><br />
-				
-				<div class="ui form">
-					<div class="two fields">
-						<div class="disabled field">
-							<label>First Name</label>
-							<input tabindex="-1" disabled="" type="text" placeholder="Read Only" value="">
-						</div>
-						<div class="disabled field">
-							<label>Last Name</label>
-							<input tabindex="-1" disabled="" type="text" placeholder="Disabled" value="">
-						</div>
-					</div>
-				</div><br />
-				<!--完善的信息-->
-				<div class="ui form">
-					<div class="field">
-						<label>性别</label>
-						<div class="ui selection dropdown">
-							<input name="gender" type="hidden" value="">
-							<i class="dropdown icon"></i>
-							<div class="default text">性别</div>
-							<div class="menu">
-								<div class="item" data-value="1">男</div>
-								<div class="item" data-value="0">女</div>
+		<form action="${basePath}/addUserDo" method="post" class="ui form">
+			<div class="ui basic segment vertical main">
+				<div class="ui raised very padded segment">
+					<h1 class="ui header"><i class="ui red icon write square"></i>请完善你的个人信息</h1>
+					<!--不可编辑的信息-->
+					
+					<div class="ui form">
+						<div class="two fields">
+							<div class="disabled field">
+								<label>用户ID</label>
+								<input name="uid"  type="text"  value="${user.getUid()}">
+							</div>
+							<div class="disabled field">
+								<label>用户昵称</label>
+								<input name="uname" type="text" value="${user.getUname()}">
 							</div>
 						</div>
-					</div>
-				</div><br />
-				
-				<form class="ui form">
+					</div><br />
+					
+					<div class="ui form">
+						<div class="two fields">
+							<div class="disabled field">
+								<label>密码</label>
+								<input name="password" type="password" value="${user.getUpassword()}">
+							</div>
+							<div class="disabled field">
+								<label>邮箱</label>
+								<input name="umailbox" type="text"  value="${user.getUmailbox()}">
+							</div>
+						</div>
+					</div><br />
+					
+					<div class="ui form">
+						<div class="two fields">
+							<div class="disabled field">
+								<label>手机号码</label>
+								<input name="phone_number" type="text" value="${user.getPhone_number()}">
+							</div>
+							<div class="disabled field">
+								<label>U币</label>
+								<input name="upoint" type="text"  value="${user.getTakegold()}">
+							</div>
+						</div>
+					</div><br />
+					
+					<div class="ui form">
+						<div class="two fields">
+							<div class="disabled field">
+								<label>注册日期</label>
+								<input name="uregdate" type="text" value="${user.getCreatedate()}">
+							</div>
+							<div class="disabled field">
+								<label>用户头像</label>
+								<input name="uhead" type="text" value="${user.getUpicture()}">
+							</div>
+						</div>
+					</div><br />
+					<!--完善的信息-->
+					<div class="ui form">
+						<div class="field">
+							<label>性别</label>
+							<div class="ui selection dropdown">
+								<input name="sex" type="hidden" value="">
+								<i class="dropdown icon"></i>
+								<div class="default text">性别</div>
+								<div class="menu">
+									<div class="item" data-value="1">男</div>
+									<div class="item" data-value="0">女</div>
+								</div>
+							</div>
+						</div>
+					</div><br />
 					<div class="field">
 						<label>生日</label>
 						<input name="birth" type="text" placeholder="年/月/日  (2018/07/12)" value="">
 					</div>
 					<div class="field">
 						<label>个人简介</label>
-						<input name="description" type="text" placeholder="一句话描述自己。" value="">
+						<input name="satement" name="uid" type="text" placeholder="一句话描述自己。" value="">
 					</div><br />
 					  <button class="ui teal button" type="submit">提交</button><br /><br />
-				</form>
+				</div>
 			</div>
-		</div>
+		</form>
 		<!--  ==========  -->
 		<!--  =   底部      =  -->
 		<!--  ==========  -->

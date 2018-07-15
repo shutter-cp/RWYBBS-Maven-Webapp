@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8"?>
+ <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"   
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.rwybbs.dao.IndexInitDao">
+
+	<!-- 得到首页的最新回复 -->
+	<select id="getRplay"  resultType="com.rwybbs.bean.IndexRplay">
+		SELECT
+			rtid,rcontent,DATE_FORMAT(rtime,"%Y/%m/%d") date
+		FROM
+			bbsrplay
+		ORDER BY
+			rid
+		DESC
+		LIMIT
+			9;
+	</select>
+	
+		<!-- 得到首页的最新发帖 -->
+	<select id="getTopic"  resultType="com.rwybbs.bean.IndexTopic">
+		SELECT
+			tid,ttopic,DATE_FORMAT(ttime,"%Y/%m/%d") date
+		FROM
+			bbstopic
+		ORDER BY
+			tclickcoount
+		DESC
+		LIMIT
+				9;
+	</select>
+	
+	<!-- 得到首页的全景业界资讯 -->
+	<select id="getPanoramicIndustryInformation"  resultType="com.rwybbs.bean.IndexFourm">
+		SELECT
+			sid,sname,stopiccount,sstatement
+		FROM
+			bbsforum
+		WHERE
+			sprofile = '全景业界资讯'
+		ORDER BY
+			stopiccount
+		DESC
+		LIMIT
+				8;
+	</select>
+	
+	<!-- 得到首页的全景作品 -->
+	<select id="getPanoramicWork"  resultType="com.rwybbs.bean.IndexFourm">
+		SELECT
+			sid,sname,stopiccount,sstatement
+		FROM
+			bbsforum
+		WHERE
+			sprofile = '全景作品'
+		ORDER BY
+			stopiccount
+		DESC
+		LIMIT
+				8;
+	</select>
+	<!-- 得到首页的生活纪实 -->
+	<select id="getLifeDocumentary"  resultType="com.rwybbs.bean.IndexFourm">
+		SELECT
+			sid,sname,stopiccount,sstatement
+		FROM
+			bbsforum
+		WHERE
+			sprofile = '生活纪实'
+		ORDER BY
+			stopiccount
+		DESC
+		LIMIT
+				8;
+	</select>
+	<!-- 得到首页的全景学苑 -->
+	<select id="getPanoramaAcademy"  resultType="com.rwybbs.bean.IndexFourm">
+		SELECT
+			sid,sname,stopiccount,sstatement
+		FROM
+			bbsforum
+		WHERE
+			sprofile = '全景学苑'
+		ORDER BY
+			stopiccount
+		DESC
+		LIMIT
+				8;
+	</select>
+	<!-- 得到首页的资源下载 -->
+	<select id="getDownload"  resultType="com.rwybbs.bean.IndexFourm">
+		SELECT
+			sid,sname,stopiccount,sstatement
+		FROM
+			bbsforum
+		WHERE
+			sprofile = '资源下载'
+		ORDER BY
+			stopiccount
+		DESC
+		LIMIT
+				8;
+	</select>
+	<!-- 得到首页的交流分享 -->
+	<select id="getExchangeSharing"  resultType="com.rwybbs.bean.IndexFourm">
+		SELECT
+			sid,sname,stopiccount,sstatement
+		FROM
+			bbsforum
+		WHERE
+			sprofile = '交流分享'
+		ORDER BY
+			stopiccount
+		DESC
+		LIMIT
+				8;
+	</select>
+	
+	
+	
+</mapper>  

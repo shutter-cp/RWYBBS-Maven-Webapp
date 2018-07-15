@@ -1,4 +1,5 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%
 String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
@@ -45,12 +46,12 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					<div class="right item">
 						<a href="#">
 							<div class="but">
-								username
+								${username}
 							</div>
 						</a>
 					</div>
 					<div class="right item but">
-						<a href="#">
+						<a href="${basePath}/bbs/index">
 							<div class="but">
 								首页
 							</div>
@@ -70,72 +71,43 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					<div class="ui raised very padded segment ">
 						<div class="ui two column grid">
 							<div class="column">
-								<h1>这是一个测试Title</h1>
-								<p>2018-07-12</p>
+								<h1>${note.getTtopic()}</h1>
+								<p>${note.getDate()}</p>
 							</div>
 							<div class="column">
-								<p class="views">浏览量：1000</p>
+								<p class="views">浏览量：${note.getTclickcoount()}</p>
 							</div>
 						</div>
 					</div>
 					<!--文章内容-->
 					<div class="ui raised segment very padded contents">
-						这里是文章
+						${note.getTcontents()}
 					</div>
 					<!--回帖-->
 					<div class="ui raised segment very padded">
 						<div class="ui comments reply">
-							<h3 class="ui dividing header">Comments</h3>
-							<div class="comment">
-								<a class="myimages">
-									<img src="${basePath}/img/upload/logo.png">
-								</a>
-								<div class="content">
-									<a class="author">Matt</a>
-									<div class="metadata">
-										<span class="date">今天下午 5:42</span>
-									</div>
-									<div class="text">太赞了！ </div>
-									<div class="actions">
-										<a class="reply">Reply</a>
-									</div>
-								</div>
-							</div>
-							<div class="comment">
-								<a class="myimages">
-									<img src="${basePath}/img/upload/logo.png">
-								</a>
-								<div class="content">
-									<a class="author">Matt</a>
-									<div class="metadata">
-										<span class="date">今天下午 5:42</span>
-									</div>
-									<div class="text">太赞了！ </div>
-									<div class="actions">
-										<a class="reply">Reply</a>
+							<h3 class="ui dividing header">评论</h3>
+							
+							<c:forEach items="${noteRplayList}" var="noteRplay">
+								<div class="comment">
+									<a class="myimages">
+										<img src="${basePath}/img/${noteRplay.getUhead()}">
+									</a>
+									<div class="content">
+										<a class="author">${noteRplay.getUname()}</a>
+										<div class="metadata">
+											<span class="date">${noteRplay.getRtime()}</span>
+										</div>
+										<div class="text">${noteRplay.getRcontent()}</div>
 									</div>
 								</div>
-							</div>
-							<div class="comment">
-								<a class="myimages">
-									<img src="${basePath}/img/upload/logo.png">
-								</a>
-								<div class="content">
-									<a class="author">Joe Henderson</a>
-									<div class="metadata">
-										<span class="date">5 天以前</span>
-									</div>
-									<div class="text">老兄，这太棒了。非常感谢。 </div>
-									<div class="actions">
-										<a class="reply">Reply</a>
-									</div>
-								</div>
-							</div>
+							</c:forEach>
+							
 							<form class="ui reply form">
 								<div class="field">
 									<textarea v-model="texts" id="texts"></textarea>
 								</div>
-								<div class="ui blue labeled teal submit icon button">
+								<div onclick="wr()" class="ui blue labeled teal submit icon button">
 									<i class="icon edit"></i> 
 									提交
 								</div>
@@ -156,12 +128,12 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 						<h3><i class="ui icon large flag red outline"></i>个人资料</h3>
 						<div class="ui segment vertical basic center aligned ">
 							<div class="ui image userLogo">
-								<img src="${basePath}/img/upload/logo.png"/>
+								<img src="${basePath}/img/${note.getGuhead()}"/>
 							</div>
 							<div class="ui header">
-								用户：ccscs
+								用户：${note.getGuname()}
 							</div>
-							<p>U币：1000</p>
+							<p>U币：${note.getGupoint()}</p>
 						</div>
 						
 						
@@ -169,10 +141,16 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					</div>
 					<div class="ui raised segment ">
 						<h3><i class="ui icon large red book"></i>最新帖子</h3>
-						<p>1</p>
-						<p>2</p>
-						<p>3</p>
-						<p>4</p>
+						<c:forEach items="${topicList}" var="topic">
+							<p>
+								<a href="${basePath}/bbs/note/${topic.getTid()}">
+									${topic.getTtopic()}
+									<samp style="float: right;">
+										${topic.getDate()}
+									</samp>
+								</a>
+							</p>
+						</c:forEach>
 					</div>
 					<div class="ui sticky">
 						<div class="ui raised segment ">
@@ -226,8 +204,26 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			    context: '#text',
 			    pushing: true
 
-			  })
-			;
+			  });
+			  
+			 /* 评论 */
+			function wr(){
+				var text = $("#texts").val();
+				$.ajax({
+					type:"post",
+					url:"${basePath}/bbs/note/write",
+					data:{"text":text,"no":${note.getTid()}},
+					success:function(data){
+						if(data=="success"){
+							location.reload();
+						}else if(data=="isNull"){
+							alert("评论出错");
+							$("#texts").val("");
+						}
+					}
+				});
+			};
+			
 			var vm = new Vue({
 				el:"#box",
 				data:{
@@ -246,6 +242,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					}
 				}
 			});
+			
+			
 		</script>
 	</body>
 </html>

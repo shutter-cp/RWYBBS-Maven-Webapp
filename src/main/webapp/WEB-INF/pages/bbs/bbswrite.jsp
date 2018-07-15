@@ -1,4 +1,5 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%
 String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
@@ -50,12 +51,12 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					<div class="right item">
 						<a href="#">
 							<div class="but">
-								username
+								${username}
 							</div>
 						</a>
 					</div>
 					<div class="right item but">
-						<a href="#">
+						<a href="${basePath}/bbs/index">
 							<div class="but">
 								首页
 							</div>
@@ -75,28 +76,25 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 							<div class="two fields">
 								<div class="field">
 									<label>标题</label>
-									<input type="text" placeholder="标题" value="">
+									<input type="text" id="title" placeholder="标题" value="">
 								</div>
 								<div class="field">
 									<div class="two fields">
 										<div class="field">
 											<label>心情</label>
-											<select class="ui search dropdown">
-												<option value="1">很好</option>
-												<option value="2">好</option>
-												<option value="3">一般</option>
-												<option value="4">生气</option>
+											<select id="temotion" class="ui search dropdown">
+												<option value="很好">很好</option>
+												<option value="好">好</option>
+												<option value="一般">一般</option>
+												<option value="生气">生气</option>
 											</select>
 										</div>
 										<div class="field">
 											<label>板块</label>
-											<select class="ui search dropdown">
-												<option value="1">全景业界资讯</option>
-												<option value="2">全景作品</option>
-												<option value="2">生活纪实</option>
-												<option value="2">全景学苑</option>
-												<option value="2">资源下载</option>
-												<option value="2">交流分享</option>
+											<select id="sprofile" class="ui search dropdown">
+												<c:forEach items="${sname}" var="sname">
+													<option value="${sname}">${sname}</option>
+												</c:forEach>
 											</select>
 										</div>
 									</div>
@@ -108,7 +106,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					<div class="ui segment very padded raised">
 						<label><strong>内容</strong></label>
 						<textarea id="editor" placeholder="此处开始书写" autofocus></textarea>
-						<input class="ui teal button" type="button" onclick="getValue(this)" id="button" value="提交" />
+						<input class="ui teal button" type="button" onclick="wr()" id="button" value="提交" />
 						<br /><br /><br />
 					</div>
 				</div>
@@ -148,9 +146,18 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			textarea: $('#editor'),
 			//optional options
 			placeholder: '',
-			defaultImage: 'images/image.png',
+			defaultImage: '${basePath}/simditor/images/image.png',
 			params: {},
-			upload: true,
+			upload : {
+				//文件上传的接口地址
+                url : '${basePath}/bbs/write/upimg', 
+                //键值对,指定文件上传接口的额外参数,上传的时候随文件一起提交
+                params: null, 
+                //服务器端获取文件数据的参数名
+                fileKey: 'photo', 
+                connectionCount: 3,
+                leaveConfirm: '正在上传文件'
+            },
 			tabIndent: true,
 			toolbar : [
 				  'title','|',
@@ -182,6 +189,36 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		function getValue(object){
 			alert(editor.getValue());
 		}
+		
+		/* 写论坛 */
+		function wr(){
+			var title = $("#title").val();
+			var temotion = $("#temotion").val();
+			var sprofile = $("#sprofile").val();
+			var text = editor.getValue();
+			alert(title);
+			alert(temotion);
+			alert(sprofile);
+			alert(text);
+			$.ajax({
+				type:"post",
+				url:"${basePath}/bbs/write/do",
+				data:{
+					"title":title,
+					"temotion":temotion,
+					"sprofile":sprofile,
+					"text":text,
+					"username":${username}
+				},
+				success:function(data){
+					if(data=="success"){
+						window.location.href = "${basePath}/bbs/index";
+					}else if(data=="error"){
+						alert("出错! 请重试！");
+					}
+				}
+			});
+		};
 		
 		</script>
 	</body>
