@@ -1,4 +1,5 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%
 String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
@@ -45,14 +46,14 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					<div class="right item">
 						<a href="#">
 							<div class="but">
-								username
+								${username}
 							</div>
 						</a>
 					</div>
 					<div class="right item but">
-						<a href="#">
+						<a href="http://47.95.220.233/RWY/index.jsp">
 							<div class="but">
-								首页
+								任我游主页
 							</div>
 						</a>
 					</div>
@@ -79,14 +80,16 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 						   <div class="content">最新回复</div>
 						</h3>
 						<div class="ui divider"></div>
-						<p><a href="#">1</a></p>
-						<p><a href="#">2</a></p>
-						<p><a href="#">3</a></p>
-						<p><a href="#">4</a></p>
-						<p><a href="#">5</a></p>
-						<p><a href="#">6</a></p>
-						<p><a href="#">7</a></p>
-						<p><a href="#">8</a></p>
+						<c:forEach items="${rplayList}" var="rplay">
+							<p>
+								<a href="${basePath}/bbs/note/${rplay.getRtid()}">
+									${rplay.getRcontent()}
+									<samp style="float: right;">
+										${rplay.getDate()}
+									</samp>
+								</a>
+							</p>
+						</c:forEach>
 					</div>
 				</div>
 				<div class="four wide column">
@@ -96,14 +99,16 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 						   <div class="content">热帖</div>
 						</h3>
 						<div class="ui divider"></div>
-						<p><a href="#">1</a></p>
-						<p><a href="#">2</a></p>
-						<p><a href="#">3</a></p>
-						<p><a href="#">4</a></p>
-						<p><a href="#">5</a></p>
-						<p><a href="#">6</a></p>
-						<p><a href="#">7</a></p>
-						<p><a href="#">8</a></p>
+						<c:forEach items="${topicList}" var="topic">
+							<p>
+								<a href="${basePath}/bbs/note/${topic.getTid()}">
+									${topic.getTtopic()}
+									<samp style="float: right;">
+										${topic.getDate()}
+									</samp>
+								</a>
+							</p>
+						</c:forEach>
 					</div>
 				</div>
 			</div>
@@ -121,58 +126,20 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				</h2>
 				<div class="ui divider"></div>
 				<div class="ui grid">
-					<div class="four wide column">
-						<a href="">
-							<div class="ui image lf">
-								<img src="${basePath}/img/bbs/index/s1.png"/>
-							</div>
-							<div class="ri">
-								<h4>title</h4>
-								<p>贴数</p>
-								<p>最后发帖时间</p>
-							</div>
-						</a>
-					</div>
-					<div class="four wide column">
-						<div class="ui image lf">
-							<img src="${basePath}/img/bbs/index/s1.png"/>
+					<c:forEach items="${fourmList1}" var="fourm">
+						<div class="four wide column">
+							<a href="${basePath}/bbs/aaa/${fourm.getSid()}">
+								<div class="ui image lf">
+									<img src="${basePath}/img/bbs/index/s1.png"/>
+								</div>
+								<div class="ri">
+									<h4>${fourm.getSname()}</h4>
+									<p>发帖数:${fourm.getStopiccount()}</p>
+									<p>${fourm.getSstatement()}</p>
+								</div>
+							</a>
 						</div>
-						<div class="ri">
-							<h4>title</h4>
-							<p>贴数</p>
-							<p>最后发帖时间</p>
-						</div>
-					</div>
-					<div class="four wide column">
-						<div class="ui image lf">
-							<img src="${basePath}/img/bbs/index/s1.png"/>
-						</div>
-						<div class="ri">
-							<h4>title</h4>
-							<p>贴数</p>
-							<p>最后发帖时间</p>
-						</div>
-					</div>
-					<div class="four wide column">
-						<div class="ui image lf">
-							<img src="${basePath}/img/bbs/index/s1.png"/>
-						</div>
-						<div class="ri">
-							<h4>title</h4>
-							<p>贴数</p>
-							<p>最后发帖时间</p>
-						</div>
-					</div>
-					<div class="four wide column">
-						<div class="ui image lf">
-							<img src="${basePath}/img/bbs/index/s1.png"/>
-						</div>
-						<div class="ri">
-							<h4>title</h4>
-							<p>贴数</p>
-							<p>最后发帖时间</p>
-						</div>
-					</div>
+					</c:forEach>	
 				</div>
 			</div>
 			<!--全景作品-->
@@ -188,18 +155,20 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				</h2>
 				<div class="ui divider"></div>
 				<div class="ui grid">
-					<div class="four wide column">
-						<a href="">
-							<div class="ui image lf">
-								<img src="${basePath}/img/bbs/index/s2.png"/>
-							</div>
-							<div class="ri">
-								<h4>title</h4>
-								<p>贴数</p>
-								<p>最后发帖时间</p>
-							</div>
-						</a>
-					</div>
+					<c:forEach items="${fourmList2}" var="fourm">
+						<div class="four wide column">
+							<a href="${basePath}/bbs/aaa/${fourm.getSid()}">
+								<div class="ui image lf">
+									<img src="${basePath}/img/bbs/index/s2.png"/>
+								</div>
+								<div class="ri">
+									<h4>${fourm.getSname()}</h4>
+									<p>发帖数:${fourm.getStopiccount()}</p>
+									<p>${fourm.getSstatement()}</p>
+								</div>
+							</a>
+						</div>
+					</c:forEach>	
 					
 				</div>
 			</div>
@@ -216,18 +185,20 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				</h2>
 				<div class="ui divider"></div>
 				<div class="ui grid">
-					<div class="four wide column">
-						<a href="">
-							<div class="ui image lf">
-								<img src="${basePath}/img/bbs/index/s3.png"/>
-							</div>
-							<div class="ri">
-								<h4>title</h4>
-								<p>贴数</p>
-								<p>最后发帖时间</p>
-							</div>
-						</a>
-					</div>
+					<c:forEach items="${fourmList3}" var="fourm">
+						<div class="four wide column">
+							<a href="${basePath}/bbs/aaa/${fourm.getSid()}">
+								<div class="ui image lf">
+									<img src="${basePath}/img/bbs/index/s3.png"/>
+								</div>
+								<div class="ri">
+									<h4>${fourm.getSname()}</h4>
+									<p>发帖数:${fourm.getStopiccount()}</p>
+									<p>${fourm.getSstatement()}</p>
+								</div>
+							</a>
+						</div>
+					</c:forEach>	
 					
 				</div>
 			</div>
@@ -244,18 +215,20 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				</h2>
 				<div class="ui divider"></div>
 				<div class="ui grid">
-					<div class="four wide column">
-						<a href="">
-							<div class="ui image lf">
-								<img src="${basePath}/img/bbs/index/s1.png"/>
-							</div>
-							<div class="ri">
-								<h4>title</h4>
-								<p>贴数</p>
-								<p>最后发帖时间</p>
-							</div>
-						</a>
-					</div>
+					<c:forEach items="${fourmList4}" var="fourm">
+						<div class="four wide column">
+							<a href="${basePath}/bbs/aaa/${fourm.getSid()}">
+								<div class="ui image lf">
+									<img src="${basePath}/img/bbs/index/s1.png"/>
+								</div>
+								<div class="ri">
+									<h4>${fourm.getSname()}</h4>
+									<p>发帖数:${fourm.getStopiccount()}</p>
+									<p>${fourm.getSstatement()}</p>
+								</div>
+							</a>
+						</div>
+					</c:forEach>	
 					
 				</div>
 			</div>
@@ -272,18 +245,20 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				</h2>
 				<div class="ui divider"></div>
 				<div class="ui grid">
-					<div class="four wide column">
-						<a href="">
-							<div class="ui image lf">
-								<img src="${basePath}/img/bbs/index/s2.png"/>
-							</div>
-							<div class="ri">
-								<h4>title</h4>
-								<p>贴数</p>
-								<p>最后发帖时间</p>
-							</div>
-						</a>
-					</div>
+					<c:forEach items="${fourmList5}" var="fourm">
+						<div class="four wide column">
+							<a href="${basePath}/bbs/aaa/${fourm.getSid()}">
+								<div class="ui image lf">
+									<img src="${basePath}/img/bbs/index/s2.png"/>
+								</div>
+								<div class="ri">
+									<h4>${fourm.getSname()}</h4>
+									<p>发帖数:${fourm.getStopiccount()}</p>
+									<p>${fourm.getSstatement()}</p>
+								</div>
+							</a>
+						</div>
+					</c:forEach>	
 					
 				</div>
 			</div>
@@ -300,18 +275,20 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				</h2>
 				<div class="ui divider"></div>
 				<div class="ui grid">
-					<div class="four wide column">
-						<a href="">
-							<div class="ui image lf">
-								<img src="${basePath}/img/bbs/index/s3.png"/>
-							</div>
-							<div class="ri">
-								<h4>title</h4>
-								<p>贴数</p>
-								<p>最后发帖时间</p>
-							</div>
-						</a>
-					</div>
+					<c:forEach items="${fourmList6}" var="fourm">
+						<div class="four wide column">
+							<a href="${basePath}/bbs/aaa/${fourm.getSid()}">
+								<div class="ui image lf">
+									<img src="${basePath}/img/bbs/index/s3.png"/>
+								</div>
+								<div class="ri">
+									<h4>${fourm.getSname()}</h4>
+									<p>发帖数:${fourm.getStopiccount()}</p>
+									<p>${fourm.getSstatement()}</p>
+								</div>
+							</a>
+						</div>
+					</c:forEach>	
 					
 				</div>
 				

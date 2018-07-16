@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+ <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"   
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.rwybbs.dao.WriteDao">
+
+	<!-- 得到板块 -->
+	<select id="getSname"  resultType="String">
+			SELECT
+				sname
+			FROM
+				bbsforum
+	</select>
+	
+	<!-- 写论坛 -->
+	<insert id="setWrite" parameterType="com.rwybbs.bean.Write" flushCache="true">  
+		INSERT
+			INTO
+				bbstopic(
+				tsid,
+				tuid,
+				temotion,
+				ttopic,
+				tcontents,
+				ttime,
+				tclickCoount,
+				tflag
+				)
+			VALUES(
+				(	SELECT
+						sid
+					FROM
+						bbsforum
+					WHERE
+						SName = #{sname}
+				),
+				(	SELECT
+						uid
+					FROM
+						bbsuser
+					WHERE
+						uname = #{username}
+				),
+				#{temotion},
+				#{ttopic},
+				#{tcontents},
+				NOW(),
+				0,
+				1
+			)
+	</insert>   
+	
+	<!-- 板块文章篇数加一 -->
+	<update id="upDateSTopicCount" parameterType="String">
+				UPDATE
+					bbsforum
+				SET
+					STopicCount=STopicCount+1
+				WHERE
+					SName = #{sname}
+		</update>
+	
+</mapper>  
