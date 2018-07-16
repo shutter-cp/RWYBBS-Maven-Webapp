@@ -99,6 +99,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 										<th>标题</th>
 										<th>正文</th>
 										<th>发帖时间</th>
+										<th>管理</th>
 									</tr>
 								</thead>
 								<tbody>
@@ -106,16 +107,28 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 										<td>约翰</td>
 										<td>已审核</td>
 										<td>John is an interesting boy but sometimes you don't really have enough room to describe everything you'd like</td>
+										<td>
+											<button class="ui button teal" >修改</button>
+											<button class="ui button red" >删除</button>
+										</td>
 									</tr>
 									<tr>
 										<td>杰米</td>
 										<td>已审核</td>
 										<td>Jamie is a kind girl but sometimes you don't really have enough room to describe everything you'd like</td>
+										<td>
+											<button class="ui button teal" >修改</button>
+											<button class="ui button red" >删除</button>
+										</td>
 									</tr>
 									<tr>
 										<td>吉尔</td>
 										<td>Denied</td>
 										<td>Jill is an alright girl but sometimes you don't really have enough room to describe everything you'd like</td>
+										<td>
+											<button class="ui button teal" >修改</button>
+											<button class="ui button red" >删除</button>
+										</td>
 									</tr>
 								</tbody>
 							</table>

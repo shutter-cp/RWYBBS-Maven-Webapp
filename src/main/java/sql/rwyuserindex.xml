@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+ <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"   
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.rwybbs.dao.RwyUserIndexDo">
+
+	
+	<select id="userindex"  parameterType="com.rwybbs.bean.UserIndex"  resultType="com.rwybbs.bean.UserIndex">
+	SELECT
+		uname,
+		DATE_FORMAT(FROM_DAYS(TO_DAYS(ubirthady)),'%Y%m%d') ubirthady,
+		usex,
+		uemail,
+		upoint,
+		ttopic,
+		tcontents,
+		DATE_FORMAT(FROM_DAYS(TO_DAYS(ttime)),'%Y%m%d') ttime
+	FROM
+		bbsuser
+		INNER JOIN bbstopic ON bbstopic.tuid = bbsuser.uid
+	WHERE
+		uname = 810226;
+	
+	</select>
+	
+</mapper>  
