@@ -1,4 +1,5 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%
 String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
@@ -68,95 +69,90 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				<div class="ui sticky">
 					<div class="ui raised segment">
 						<h3 class="listtitle"><i class="large red tasks icon"></i>板块导航</h3>
-						<a herf>
 							<p class="lists"><i class="circular inverted red feed icon"></i>全景业界资讯</p>
-						</a>
-						<a herf>
+							<c:forEach  items="${forumlist}" var="forumlist">
+								<a href="${basePath}/bbs/Forumlist/全景业界资讯/${forumlist.getSID()}/1">
+									<p class="listsson"><i class="red angle right icon"></i>${forumlist.getSName()}</p>
+								</a>
+							</c:forEach>
 							<p class="lists"><i class="circular inverted red world icon"></i>全景作品</p>
-						</a>
-						<a herf>
+							<c:forEach  items="${forumlist2}" var="forumlist">
+								<a href="${basePath}/bbs/Forumlist/全景作品/${forumlist.getSID()}/1">
+									<p class="listsson"><i class="red angle right icon"></i>${forumlist.getSName()}</p>
+								</a>
+							</c:forEach>
 							<p class="lists"><i class="circular inverted red map icon"></i>生活纪实</p>
-						</a>
-						<a herf>
+							<c:forEach  items="${forumlist3}" var="forumlist">
+								<a href="${basePath}/bbs/Forumlist/生活纪实/${forumlist.getSID()}/1">
+									<p class="listsson"><i class="red angle right icon"></i>${forumlist.getSName()}</p>
+								</a>
+							</c:forEach>
 							<p class="lists"><i class="circular inverted red university icon"></i>全景学苑</p>
-						</a>
-						<a herf>
+							<c:forEach  items="${forumlist4}" var="forumlist">
+								<a href="${basePath}/bbs/Forumlist/全景学苑/${forumlist.getSID()}/1">
+									<p class="listsson"><i class="red angle right icon"></i>${forumlist.getSName()}</p>
+								</a>
+							</c:forEach>
 							<p class="lists"><i class="circular inverted red folder open icon"></i>资源下载</p>
-						</a>
-						<a herf>
+							<c:forEach  items="${forumlist5}" var="forumlist">
+								<a href="${basePath}/bbs/Forumlist/资源下载/${forumlist.getSID()}/1">
+									<p class="listsson"><i class="red angle right icon"></i>${forumlist.getSName()}</p>
+								</a>
+							</c:forEach>
 							<p class="lists"><i class="circular inverted red users icon"></i>交流分享</p>
-						</a>
+							<c:forEach  items="${forumlist6}" var="forumlist">
+								<a href="${basePath}/bbs/Forumlist/交流分享/${forumlist.getSID()}/1">
+									<p class="listsson"><i class="red angle right icon"></i>${forumlist.getSName()}</p>
+								</a>
+							</c:forEach>
 					</div>
 				</div>
 			</div>
 			<!--右边-->
 			<div class="twelve wide column" id="leftlist">
 				<div class="ui raised segment ritghttitle">
-					<h3><i class="circular inverted red feed icon"></i>全景业界资讯 Panoramic work</h3>
-					<p class="nodenum">帖子数：</p>
+					<h3><i class="large red Browser icon"></i>${forum.getSName()}</h3>
+					<a href>
+					<p class="Master"><i class="large red User icon"></i>版主：${forum.getUName()}</p>
+					</a><br/><br/>
+					<h5 class="Statement"><i class="large red comment outline icon"></i>${forum.getSStatement()}</h5>
+					<br/>
+					<p class="nodenum"><i class="large red Pointing Up icon"></i>点击量：${forum.getSClickCoount()}</p>
+					<p class="nodenum"><i class="large red Edit icon"></i>帖子数：${forum.getSTopicCount()}&nbsp;&nbsp;&nbsp;&nbsp;</p>
+					
 				</div>
 				<div class="ui sticky">
-					<button class="ui red button addbutton">
-							<i class="add to calendar icon"></i>发布新帖子
-					</button>
+					<a href>
+						<button class="ui red button addbutton">
+								<i class="add to calendar icon"></i>发布新帖子
+						</button>
+					</a>
 				</div>
 				<div class="ui raised segment contents">
-					<div class="ui vertical segment">
-						1<br /><br /><br /><br />
-					</div>
-					<div class="ui vertical segment">
-						1<br /><br /><br /><br />
-					</div>
-					<div class="ui vertical segment">
-						1<br /><br /><br /><br />
-					</div>
-					<div class="ui vertical segment">
-						1<br /><br /><br /><br />
-					</div>
-					<div class="ui vertical segment">
-						1<br /><br /><br /><br />
-					</div>
-					<div class="ui vertical segment">
-						1<br /><br /><br /><br />
-					</div>
-					<div class="ui vertical segment">
-						1<br /><br /><br /><br />
-					</div>
-					<div class="ui vertical segment">
-						1<br /><br /><br /><br />
-					</div>
-					<div class="ui vertical segment">
-						1<br /><br /><br /><br />
-					</div>
-					<div class="ui vertical segment">
-						1<br /><br /><br /><br />
-					</div>
-					<div class="ui vertical segment">
-						1<br /><br /><br /><br />
-					</div>
-					<div class="ui vertical segment">
-						1<br /><br /><br /><br />
-					</div>
-					<div class="ui vertical segment">
-						1<br /><br /><br /><br />
-					</div>
+					<c:forEach  items="${topic}" var="topic">
+						<div class="ui vertical segment onetopic">
+								<a href=>
+									<h4>${topic.getTTopic()}</h4>
+								</a>
+								<p class="timeandauthor">
+									发帖时间：${topic.getTTime()}
+									<br/>
+									作者：
+									<a href=>
+										${topic.getUName()}
+									</a>
+								</p>
+						</div>
+					</c:forEach>
 				</div>
 				<div class="ui pagination menu pagebutton">
-					<a class="active item">
-						1
-					</a>
-					<div class="disabled item">
-						...
-					</div>
-					<a class="item">
-						10
-					</a>
-					<a class="item">
-						11
-					</a>
-					<a class="item">
-						12
-					</a>
+					<c:set var="sum" value="0" /> 
+					<c:forEach var="i" begin="1" end="${pagecount}">
+						<a href="${basePath}/bbs/Forumlist/${SProfile}/${forum.getSID()}/${i}" class="item">
+							${i}
+						</a> 
+						<c:set var="sum" value="${sum + i}" /> 
+					</c:forEach>
 				</div>
 			</div>
 		</div>

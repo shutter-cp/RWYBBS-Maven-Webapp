@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+ <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"   
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.rwybbs.dao.RwySetModeratorDao">
+
+	
+	<select id="smf"  parameterType="com.rwybbs.bean.SetModeratorForum">
+			INSERT
+			INTO 
+			bbsforum (SName,SMasterID,SProfile,SStatement,STopicCount,SClickCoount)
+			VALUES 
+			(#{SName},(SELECT UID FROM bbsuser WHERE UName=#{UName}),#{SProfile},#{SStatement},0,0)
+	</select>
+	
+</mapper>  

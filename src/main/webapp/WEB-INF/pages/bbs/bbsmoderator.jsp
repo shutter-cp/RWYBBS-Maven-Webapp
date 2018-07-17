@@ -1,4 +1,5 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%
 String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
@@ -78,46 +79,32 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			   	<br /><br />
 			   <table class="ui celled table">
 				  <thead>
-				    <tr><th>帖子名</th>
+				    <tr>
+				    <th>ID</th>
+				    <th>帖子名</th>
 				    <th>所在版块</th>
 				    <th>发帖人</th>
-				    <th>标题</th>
 				    <th>发帖时间</th>
 				    <th>审核状态</th>
 				    <th>操作</th>
 				  </tr></thead>
 				  <tbody>
+				  <c:forEach  items="${twm}" var="twm">
 				    <tr>
-				     <td>Cell</td>
-				      <td>Cell</td>
-				      <td>Cell</td>
-				      <td>Cell</td>
-				      <td>Cell</td>
-				      <td>Cell</td>
-				      <td><button class="ui red button">删除</button><button class="ui teal button">审核</button></td>
+				      <td>${twm.getTID()}</td>
+				      <td>${twm.getTTopic()}</td>
+				      <td>${twm.getSName()}</td>
+				      <td>${twm.getUName()}</td>
+				      <td>${twm.getTTime()}</td>
+				      <td>${twm.getTFlag()}</td>
+				      <td><button onclick="dt('${twm.getTTopic()}','${twm.getTID()}','${twm.getUName()}')"  class="ui red button">删除</button>
+				      <button onclick="ut('${twm.getTTopic()}','${twm.getTID()}','${twm.getUName()}')" class="ui teal button">审核</button></td>
 				    </tr>
-				    <tr>
-				      <td>Cell</td>
-				      <td>Cell</td>
-				      <td>Cell</td>
-				      <td>Cl</td>
-				      <td>Cell</td>
-				      <td>Cell</td>
-				      <td><button class="ui red button">删除</button><button class="ui teal button">审核</button></td>
-				    </tr>
-				    <tr>
-				      <td>Cell</td>
-				      <td>Cell</td>
-				      <td>Cell</td>
-				      <td>Cell</td>
-				      <td>Cell</td>
-				      <td>Cell</td>
-				      <td><button class="ui red button">删除</button><button class="ui teal button">审核</button></td>
-				    </tr>
+				    </c:forEach>
 				  </tbody>
 				  <tfoot>
 				    <tr><th colspan="7">
-				      <div class="ui right floated pagination menu">
+				      <!-- <div class="ui right floated pagination menu">
 				        <a class="icon item">
 				          <i class="left chevron icon"></i>
 				        </a>
@@ -128,7 +115,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				        <a class="icon item">
 				          <i class="right chevron icon"></i>
 				        </a>
-				      </div>
+				      </div> -->
 				    </th>
 				  </tr></tfoot>
 				</table>
@@ -162,7 +149,42 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		
 		<script type="text/javascript">
 			$('.ui.dropdown').dropdown();
-		
+		/* 删除帖子 */
+		function dt(TTopic,TID,UName){
+				$.ajax({
+					type:"post",
+					url:"${basePath}/bbs/admin/deletetopic",
+					data:{"TTopic":TTopic,
+					"TID":TID,
+					"UName":UName},
+					success:function(data){
+						if(data=="success"){
+						window.location.href = "${basePath}/bbs/moderator";
+						}else if(data=="isNull"){
+							alert("帖子已经删除");
+							$("#texts").val("");
+						}
+					}
+				});
+			};
+			/* 审核帖子 */
+		function ut(TTopic,TID,UName){
+				$.ajax({
+					type:"post",
+					url:"${basePath}/bbs/admin/updatetopic",
+					data:{"TTopic":TTopic,
+					"TID":TID,
+					"UName":UName},
+					success:function(data){
+						if(data=="success"){
+						window.location.href = "${basePath}/bbs/moderator";
+						}else if(data=="isNull"){
+							alert("帖子已经审核");
+							$("#texts").val("");
+						}
+					}
+				});
+			};
 		var vm = new Vue({
 			el:"#box",
 			data:{
