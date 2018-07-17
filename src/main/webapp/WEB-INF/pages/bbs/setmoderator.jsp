@@ -9,7 +9,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   <head>
     <base href="<%=basePath%>">
     
-    <title>My JSP 'bbsadduser.jsp' starting page</title>
+    <title>设定版主</title>
     
 	<meta http-equiv="pragma" content="no-cache">
 	<meta http-equiv="cache-control" content="no-cache">
@@ -87,10 +87,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					<div class="field">
 					<label>版块主题选择</label>
 					<select name="SProfile" class="ui search dropdown">
-						 <option value="全景业界资讯">全景业界资讯</option>
-						 <option value="全景作品">全景作品</option>
+						 <option value="VR业界资讯">VR业界资讯</option>
+						 <option value="VR作品">VR作品</option>
 						 <option value="生活纪实">生活纪实</option>
-						 <option value="全景学苑">全景学苑</option>
+						 <option value="VR学苑">VR学苑</option>
 						 <option value="资源下载">资源下载</option>
 						 <option value="交流分享">交流分享</option>
 					</select>

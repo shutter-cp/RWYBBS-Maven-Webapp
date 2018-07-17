@@ -46,6 +46,8 @@ public class RwySetModerator {
 			String SProfile,String SStatement){
 		ModelAndView andView = new ModelAndView("redirect:/bbs/admin");	
 		rwySetModeratorService.SMFService(SName, UName, SProfile, SStatement);
+		rwySetModeratorService.SMFUService(UName);
 		return andView;
 	}
+	
 }

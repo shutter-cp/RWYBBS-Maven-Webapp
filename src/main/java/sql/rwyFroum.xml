@@ -21,7 +21,8 @@
 		WHERE
 			SID=TSID and 
 			TUID=UID and 
-			SID=#{SID}
+			SID=#{SID} and
+			tflag=1
 		LIMIT
 			#{Page},10
 	</select>

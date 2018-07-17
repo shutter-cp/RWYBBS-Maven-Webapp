@@ -10,7 +10,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   <head>
     <base href="<%=basePath%>">
     
-    <title>bbsindex</title>
+    <title>论坛</title>
     
 	<meta http-equiv="pragma" content="no-cache">
 	<meta http-equiv="cache-control" content="no-cache">
@@ -117,7 +117,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				<h2 class="ui header">
 				   	<i class="feed icon"></i>
 				   	<div class="content">
-				 		全景业界资讯
+				 		VR业界资讯
 				   		<div class="sub header">
 				   			Panoramic industry information
 				   		</div>
@@ -127,7 +127,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				<div class="ui grid">
 					<c:forEach items="${fourmList1}" var="fourm">
 						<div class="four wide column">
-							<a href="${basePath}/bbs/Forumlist/全景业界资讯/${fourm.getSid()}/1">
+							<a href="${basePath}/bbs/Forumlist/VR业界资讯/${fourm.getSid()}/1">
 								<div class="ui image lf">
 									<img src="${basePath}/img/bbs/index/s1.png"/>
 								</div>
@@ -146,7 +146,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				<h2 class="ui header">
 				   	<i class="world icon"></i>
 				   	<div class="content">
-				 		全景作品
+				 		VR作品
 				   		<div class="sub header">
 				   			Panoramic work
 				   		</div>
@@ -156,7 +156,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				<div class="ui grid">
 					<c:forEach items="${fourmList2}" var="fourm">
 						<div class="four wide column">
-							<a href="${basePath}/bbs/Forumlist/全景作品/${fourm.getSid()}/1">
+							<a href="${basePath}/bbs/Forumlist/VR作品/${fourm.getSid()}/1">
 								<div class="ui image lf">
 									<img src="${basePath}/img/bbs/index/s2.png"/>
 								</div>
@@ -206,7 +206,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				<h2 class="ui header">
 				   	<i class="university icon"></i>
 				   	<div class="content">
-				 		全景学苑 
+				 		VR学苑 
 				   		<div class="sub header">
 				   			Panorama Academy
 				   		</div>
@@ -216,7 +216,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				<div class="ui grid">
 					<c:forEach items="${fourmList4}" var="fourm">
 						<div class="four wide column">
-							<a href="${basePath}/bbs/Forumlist/全景学苑/${fourm.getSid()}/1">
+							<a href="${basePath}/bbs/Forumlist/VR学苑/${fourm.getSid()}/1">
 								<div class="ui image lf">
 									<img src="${basePath}/img/bbs/index/s1.png"/>
 								</div>

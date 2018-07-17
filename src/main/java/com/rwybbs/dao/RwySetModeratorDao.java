@@ -17,4 +17,15 @@ public interface RwySetModeratorDao {
 	 * @since  1.0.0
 	 */
 	public void smf(SetModeratorForum smf);
+	/**
+	 * 使用户版主状态置1
+	 * 方法名：smfu
+	 * 创建人：chenPeng
+	 * 时间：2018年7月17日-下午8:27:17 
+	 * 手机:17673111810
+	 * @param smf void
+	 * @exception 
+	 * @since  1.0.0
+	 */
+	public void smfu(SetModeratorForum smf);
 }

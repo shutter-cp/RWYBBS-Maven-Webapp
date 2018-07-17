@@ -33,4 +33,9 @@ public class RwySetModeratorService {
 		smf.setSStatement(SStatement);
 		rwySetModeratorDao.smf(smf);
 	}
+	public void SMFUService(String UName){
+		SetModeratorForum smf = new SetModeratorForum();
+		smf.setUName(UName);
+		rwySetModeratorDao.smfu(smf);
+	}
 }

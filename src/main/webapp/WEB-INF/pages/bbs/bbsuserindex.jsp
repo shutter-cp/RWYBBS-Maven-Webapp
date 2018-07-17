@@ -10,7 +10,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   <head>
     <base href="<%=basePath%>">
     
-    <title>My JSP 'bbsuserindex.jsp' starting page</title>
+    <title>个人中心</title>
     
 	<meta http-equiv="pragma" content="no-cache">
 	<meta http-equiv="cache-control" content="no-cache">
@@ -67,7 +67,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				<div class="ui grid">
 					<div class="three wide conten">
 						<div class="ui image">
-							<img src="${basePath}/img/upload/userimg.png"/>	
+							<img src="${basePath}/img/${person.getGuhead()}"/>	
 						</div>
 					</div>
 					<div class="thirteen wide conten">

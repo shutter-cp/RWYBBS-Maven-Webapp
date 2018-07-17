@@ -36,17 +36,13 @@ public class RwyForumWeb {
 		
 		List<Forum> forum = rwyForumService.ForumService(SID);
 		List<Topic> topic =rwyForumService.TopicService(SID,Page);
-		List<ForumList> forumlist=rwyForumService.ForumListService("全景业界资讯");
-		List<ForumList> forumlist2=rwyForumService.ForumListService("全景作品");
+		List<ForumList> forumlist=rwyForumService.ForumListService("VR业界资讯");
+		List<ForumList> forumlist2=rwyForumService.ForumListService("VR作品");
 		List<ForumList> forumlist3=rwyForumService.ForumListService("生活纪实");
-		List<ForumList> forumlist4=rwyForumService.ForumListService("全景学苑");
+		List<ForumList> forumlist4=rwyForumService.ForumListService("VR学苑");
 		List<ForumList> forumlist5=rwyForumService.ForumListService("资源下载");
 		List<ForumList> forumlist6=rwyForumService.ForumListService("交流分享");
 		Integer pagecount=rwyForumService.PageCountService(SID);		
-		if (forum==null && topic==null) {
-			andView.setViewName("404");
-			return andView;
-		}
 		
 		andView.setViewName("bbs/bbslist");
 		andView.addObject("SProfile", SProfile);

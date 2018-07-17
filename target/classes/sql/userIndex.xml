@@ -11,7 +11,8 @@
 			DATE_FORMAT(ubirthady,'%y/%m/%d') ubirthady,
 			usex,
 			uemail,
-			upoint
+			upoint,
+			uhead guhead
 		FROM
 			bbsuser
 		WHERE

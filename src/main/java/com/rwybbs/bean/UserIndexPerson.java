@@ -23,6 +23,14 @@ public class UserIndexPerson {
 	private String usex;
 	private String uemail;
 	private Integer upoint;
+	private String guhead;
+	
+	public String getGuhead() {
+		return guhead;
+	}
+	public void setGuhead(String guhead) {
+		this.guhead = guhead;
+	}
 	public Integer getUid() {
 		return uid;
 	}

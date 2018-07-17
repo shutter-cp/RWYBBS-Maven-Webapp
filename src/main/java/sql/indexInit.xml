@@ -22,6 +22,8 @@
 			tid,ttopic,DATE_FORMAT(ttime,"%Y/%m/%d") date
 		FROM
 			bbstopic
+		WHERE
+			tflag=1
 		ORDER BY
 			tclickcoount
 		DESC
@@ -36,7 +38,7 @@
 		FROM
 			bbsforum
 		WHERE
-			sprofile = '全景业界资讯'
+			sprofile = 'VR业界资讯'
 		ORDER BY
 			stopiccount
 		DESC
@@ -51,7 +53,7 @@
 		FROM
 			bbsforum
 		WHERE
-			sprofile = '全景作品'
+			sprofile = 'VR作品'
 		ORDER BY
 			stopiccount
 		DESC
@@ -79,7 +81,7 @@
 		FROM
 			bbsforum
 		WHERE
-			sprofile = '全景学苑'
+			sprofile = 'VR学苑'
 		ORDER BY
 			stopiccount
 		DESC

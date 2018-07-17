@@ -11,5 +11,13 @@
 			VALUES 
 			(#{SName},(SELECT UID FROM bbsuser WHERE UName=#{UName}),#{SProfile},#{SStatement},0,0)
 	</select>
+	<select id="smfu"  parameterType="com.rwybbs.bean.SetModeratorForum">
+			UPDATE 
+			bbsuser
+			SET 
+			UIsSectioner=1
+			WHERE 
+			UName=#{UName}
+	</select>
 	
 </mapper>  

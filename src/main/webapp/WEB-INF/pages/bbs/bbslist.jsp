@@ -10,7 +10,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   <head>
     <base href="<%=basePath%>">
     
-    <title>My JSP 'bbslist.jsp' starting page</title>
+    <title>论坛</title>
     
 	<meta http-equiv="pragma" content="no-cache">
 	<meta http-equiv="cache-control" content="no-cache">
@@ -66,15 +66,15 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				<div class="ui sticky">
 					<div class="ui raised segment animated zoomInLeft">
 						<h3 class="listtitle"><i class="large red tasks icon"></i>板块导航</h3>
-							<p class="lists"><i class="circular inverted red feed icon"></i>全景业界资讯</p>
+							<p class="lists"><i class="circular inverted red feed icon"></i>VR业界资讯</p>
 							<c:forEach  items="${forumlist}" var="forumlist">
-								<a href="${basePath}/bbs/Forumlist/全景业界资讯/${forumlist.getSID()}/1">
+								<a href="${basePath}/bbs/Forumlist/VR业界资讯/${forumlist.getSID()}/1">
 									<p class="listsson"><i class="red angle right icon"></i>${forumlist.getSName()}</p>
 								</a>
 							</c:forEach>
-							<p class="lists"><i class="circular inverted red world icon"></i>全景作品</p>
+							<p class="lists"><i class="circular inverted red world icon"></i>VR作品</p>
 							<c:forEach  items="${forumlist2}" var="forumlist">
-								<a href="${basePath}/bbs/Forumlist/全景作品/${forumlist.getSID()}/1">
+								<a href="${basePath}/bbs/Forumlist/VR作品/${forumlist.getSID()}/1">
 									<p class="listsson"><i class="red angle right icon"></i>${forumlist.getSName()}</p>
 								</a>
 							</c:forEach>
@@ -84,9 +84,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 									<p class="listsson"><i class="red angle right icon"></i>${forumlist.getSName()}</p>
 								</a>
 							</c:forEach>
-							<p class="lists"><i class="circular inverted red university icon"></i>全景学苑</p>
+							<p class="lists"><i class="circular inverted red university icon"></i>VR学苑</p>
 							<c:forEach  items="${forumlist4}" var="forumlist">
-								<a href="${basePath}/bbs/Forumlist/全景学苑/${forumlist.getSID()}/1">
+								<a href="${basePath}/bbs/Forumlist/VR学苑/${forumlist.getSID()}/1">
 									<p class="listsson"><i class="red angle right icon"></i>${forumlist.getSName()}</p>
 								</a>
 							</c:forEach>
