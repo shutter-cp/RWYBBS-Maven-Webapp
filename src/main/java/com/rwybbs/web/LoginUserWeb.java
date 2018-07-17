@@ -91,5 +91,79 @@ public class LoginUserWeb {
 		return new ModelAndView("redirect:/bbs/index");
 	}
 	
+	/**
+	 * 跳转到版主登陆页面去
+	 * 方法名：moderatorLogin
+	 * 创建人：chenPeng
+	 * 时间：2018年7月16日-下午12:18:48 
+	 * 手机:17673111810
+	 * @return ModelAndView
+	 * @exception 
+	 * @since  1.0.0
+	 */
+	@RequestMapping("/moderatorLogin")
+	public ModelAndView moderatorLogin(){
+		ModelAndView andView = new ModelAndView();
+		andView.setViewName("moderatorLogin");
+		return andView;
+	}
+	
+	/**
+	 * 验证版主登陆
+	 * 方法名：moderatorLoginDo
+	 * 创建人：chenPeng
+	 * 时间：2018年7月16日-下午12:42:16 
+	 * 手机:17673111810
+	 * @param username
+	 * @param password
+	 * @return ModelAndView
+	 * @exception 
+	 * @since  1.0.0
+	 */
+	@RequestMapping("/moderatorLoginDo")
+	public ModelAndView moderatorLoginDo(String username,String password){
+		ModelAndView andView = new ModelAndView("redirect:/bbs/moderator");
+		loginUserService.moderatorLoginDo(username, password);
+		return andView;
+	}
+	
+	
+	/**
+	 * 跳转到管理员登陆
+	 * 方法名：moderatorLogin
+	 * 创建人：chenPeng
+	 * 时间：2018年7月16日-下午12:21:13 
+	 * 手机:17673111810
+	 * @return ModelAndView
+	 * @exception 
+	 * @since  1.0.0
+	 */
+	@RequestMapping("/adminLogin")
+	public ModelAndView adminLogin(){
+		ModelAndView andView = new ModelAndView();
+		andView.setViewName("adminLogin");
+		return andView;
+	}
+	
+	/**
+	 * 验证管理员登陆
+	 * 方法管理员名：moderatorLoginDo
+	 * 创建人：chenPeng
+	 * 时间：2018年7月16日-下午12:40:32 
+	 * 手机:17673111810
+	 * @param username
+	 * @param password
+	 * @return ModelAndView
+	 * @exception 
+	 * @since  1.0.0
+	 */
+	@RequestMapping("/adminLoginDo")
+	public ModelAndView adminLoginDo(String username,String password){
+		ModelAndView andView = new ModelAndView("redirect:/bbs/admin");
+		loginUserService.adminLoginDo(username, password);
+		return andView;
+	}
+	
+
 	
 }

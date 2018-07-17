@@ -68,7 +68,7 @@ public class NoteWeb {
 		/*得到评论部分数据*/
 		List<NoteRplay> noteRplayList = noteService.getNoteRplay(no);
 		/*得到热帖*/
-		List<IndexTopic> topicList = indexService.getIndexTopic();
+		List<IndexTopic> topicList = indexService.getIndexTopicMini();
 		
 		
 		andView.addObject("note", note);

@@ -19,6 +19,7 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -150,7 +151,51 @@ public class WriteWeb {
 		return "success";
 	}
 	
+	/**
+	 * 通过连接跳入指定的博客修改页面
+	 * 方法名：upDateWriteInit
+	 * 创建人：chenPeng
+	 * 时间：2018年7月16日-下午3:54:45 
+	 * 手机:17673111810
+	 * @param no
+	 * @return ModelAndView
+	 * @exception 
+	 * @since  1.0.0
+	 */
+	@RequestMapping("bbs/upwrite/{no}")
+	public ModelAndView upDateWriteInit(@PathVariable Integer no){
+		ModelAndView andView = new ModelAndView();
+		if (writeService.eqNoteUser(no)==null) {
+			andView.setViewName("error404");
+			return andView;
+		}
+		andView.addObject("note", writeService.upWriteInit(no));
+		andView.setViewName("bbs/bbsupwrite");
+		return andView;
+	}
 	
+	
+	@RequestMapping(value="/bbs/upwrite/do",method=RequestMethod.POST)
+	@ResponseBody
+	public String upWriteDo(HttpServletRequest re){
+		String title = re.getParameter("title");
+		String text = re.getParameter("text");
+		String tid = re.getParameter("tid");
+		
+		//判断为空
+		IsNull isNull = new IsNull();
+		
+		if (isNull.isNull(title)||
+				isNull.isNull(text)||
+					isNull.isNull(tid)) {
+			return "error";
+		}
+		
+		//写入
+		writeService.upWriteDo(title, text, tid);
+		
+		return "success";
+	}
 	
     /**
      * 服务器地址

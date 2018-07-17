@@ -76,26 +76,17 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 							<div class="two fields">
 								<div class="field">
 									<label>标题</label>
-									<input type="text" id="title" placeholder="标题" value="">
+									<input type="text" id="title"  value="${note.getTtopic()}">
 								</div>
 								<div class="field">
 									<div class="two fields">
 										<div class="field">
 											<label>心情</label>
-											<select id="temotion" class="ui search dropdown">
-												<option value="很好">很好</option>
-												<option value="好">好</option>
-												<option value="一般">一般</option>
-												<option value="生气">生气</option>
-											</select>
+											<input type="text" readonly="readonly" id="title"  value="${note.getTemotion()}">
 										</div>
 										<div class="field">
 											<label>板块</label>
-											<select id="sprofile" class="ui search dropdown">
-												<c:forEach items="${sname}" var="sname">
-													<option value="${sname}">${sname}</option>
-												</c:forEach>
-											</select>
+											<input type="text" readonly="readonly" id="title"  value="${note.getSname()}">
 										</div>
 									</div>
 								</div>
@@ -186,29 +177,22 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			cleanPaste: false
 		});
 		
-		function getValue(object){
-			alert(editor.getValue());
-		}
+		/* 数据回填 */
+		editor.setValue('${note.getTcontents()}');
+		
 		
 		/* 写论坛 */
 		function wr(){
 			var title = $("#title").val();
-			var temotion = $("#temotion").val();
-			var sprofile = $("#sprofile").val();
 			var text = editor.getValue();
-			alert(title);
-			alert(temotion);
-			alert(sprofile);
-			alert(text);
+			var tid = ${note.getTid()};
 			$.ajax({
 				type:"post",
-				url:"${basePath}/bbs/write/do",
+				url:"${basePath}/bbs/upwrite/do",
 				data:{
 					"title":title,
-					"temotion":temotion,
-					"sprofile":sprofile,
 					"text":text,
-					"username":${username}
+					"tid":tid
 				},
 				success:function(data){
 					if(data=="success"){

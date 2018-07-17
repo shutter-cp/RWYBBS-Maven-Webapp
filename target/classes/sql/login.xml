@@ -25,5 +25,28 @@
 			upassword = #{password}
 	</select>
 	
+	<!-- 管理员验证账号密码 -->
+	<select id="adminLoginDo"  parameterType="com.rwybbs.bean.UserAndPassword"  resultType="String">
+			SELECT
+			account
+		FROM
+			admin
+		WHERE
+			account =  #{username} AND
+			apassword =  #{password} 
+	</select>
+	
+	<!-- 版主验证账号密码 -->
+	<select id="moderatorLoginDo"  parameterType="com.rwybbs.bean.UserAndPassword"  resultType="String">
+			SELECT
+				uname
+			FROM
+				bbsuser
+			WHERE
+				uname = #{username} AND
+				upassword = #{password} AND
+				uissectioner = 1
+	</select>
+	
 	
 </mapper>  

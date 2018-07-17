@@ -71,4 +71,50 @@ public class LoginUserService {
 		return user;
 	}
 	
+	/**
+	 * 版主登陆
+	 * 方法名：moderatorLoginDog
+	 * 创建人：chenPeng
+	 * 时间：2018年7月16日-下午12:56:26 
+	 * 手机:17673111810
+	 * @param username
+	 * @param password
+	 * @return String
+	 * @exception 
+	 * @since  1.0.0
+	 */
+	public String moderatorLoginDo(String username,String password){
+		UserAndPassword users = new UserAndPassword();
+		users.setPassword(password);
+		users.setUsername(username);
+		String moderator = loginDao.moderatorLoginDo(users);
+		if (moderator!=null) {
+			re.getSession().setAttribute("moderator", moderator);
+		}
+		return moderator;
+	}
+	
+	/**
+	 * 管理员登陆
+	 * 方法名：adminLoginDo
+	 * 创建人：chenPeng
+	 * 时间：2018年7月16日-下午3:05:22 
+	 * 手机:17673111810
+	 * @param username
+	 * @param password
+	 * @return String
+	 * @exception 
+	 * @since  1.0.0
+	 */
+	public String adminLoginDo(String username,String password){
+		UserAndPassword users = new UserAndPassword();
+		users.setPassword(password);
+		users.setUsername(username);
+		String admin = loginDao.adminLoginDo(users);
+		if (admin!=null) {
+			re.getSession().setAttribute("admin", admin);
+		}
+		return admin;
+	}
+	
 }

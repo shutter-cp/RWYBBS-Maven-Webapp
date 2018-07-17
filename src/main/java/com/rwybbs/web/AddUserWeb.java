@@ -43,7 +43,8 @@ public class AddUserWeb {
 			String birth,
 			String satement
 			){
-		ModelAndView andView = new ModelAndView();
+		ModelAndView andView = new ModelAndView(
+				"redirect:/login？username="+uname);
 		
 		
 		BbsUser bbsUser = new BbsUser();
@@ -62,7 +63,6 @@ public class AddUserWeb {
 		
 		addUserService.addUser(bbsUser);
 		
-		andView.setViewName("bbs/bbsindex");
 		return andView;
 	}
 	
