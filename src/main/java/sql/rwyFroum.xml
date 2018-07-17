@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+ <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"   
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.rwybbs.dao.RwyForumDao">
+
+
+	<select id="forum"  parameterType="com.rwybbs.bean.Forum"  resultType="com.rwybbs.bean.Forum">
+		SELECT
+			SName,STopicCount,SClickCoount,UName,SID,SStatement
+		FROM
+			bbsforum,bbsuser
+		WHERE
+			SMasterID=UID and
+			SID=#{SID}
+	</select>
+	<select id="topic"  parameterType="com.rwybbs.bean.Topic"  resultType="com.rwybbs.bean.Topic">
+		SELECT
+			TTopic,UName,DATE_FORMAT(TTime,"%Y-%m-%d") TTime,TClickCoount,TReplyCount
+		FROM
+			bbsuser,bbstopic,bbsforum
+		WHERE
+			SID=TSID and 
+			TUID=UID and 
+			SID=#{SID}
+		LIMIT
+			#{Page},10
+	</select>
+	<select id="forumlist"  parameterType="com.rwybbs.bean.ForumList"  resultType="com.rwybbs.bean.ForumList">
+		SELECT
+			SName,SID
+		FROM
+			bbsforum
+		WHERE
+			SProfile=#{SProfile}
+	</select>
+	<select id="pagecount"  parameterType="Integer"  resultType="Integer">
+		SELECT 
+			COUNT(*)
+		FROM 
+			bbstopic
+		WHERE 
+			TSID=#{SID}
+	</select>
+</mapper>  

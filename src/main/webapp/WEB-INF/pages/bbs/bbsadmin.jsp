@@ -1,4 +1,5 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%
 String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
@@ -79,46 +80,33 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			   	<br /><br />
 			   <table class="ui celled table">
 				  <thead>
-				    <tr><th>帖子名</th>
+				  <tr>
+				    <th>ID</th>
+				    <th>帖子名</th>
 				    <th>所在版块</th>
 				    <th>发帖人</th>
-				    <th>标题</th>
 				    <th>发帖时间</th>
 				    <th>审核状态</th>
 				    <th>操作</th>
-				  </tr></thead>
+				  </tr>
+				  </thead>
 				  <tbody>
+				  <c:forEach  items="${twa}" var="twa">
 				    <tr>
-				     <td>Cell</td>
-				      <td>Cell</td>
-				      <td>Cell</td>
-				      <td>Cell</td>
-				      <td>Cell</td>
-				      <td>Cell</td>
-				      <td><button class="ui red button">删除</button><button class="ui teal button">审核</button></td>
+				      <td>${twa.getTID()}</td>
+				      <td>${twa.getTTopic()}</td>
+				      <td>${twa.getSName()}</td>
+				      <td>${twa.getUName()}</td>
+				      <td>${twa.getTTime()}</td>
+				      <td>${twa.getTFlag()}</td>
+				      <td><button onclick="dt('${twa.getTTopic()}','${twa.getTID()}','${twa.getUName()}')"  class="ui red button">删除</button>
+				      <button onclick="ut('${twa.getTTopic()}','${twa.getTID()}','${twa.getUName()}')" class="ui teal button">审核</button></td>
 				    </tr>
-				    <tr>
-				      <td>Cell</td>
-				      <td>Cell</td>
-				      <td>Cell</td>
-				      <td>Cl</td>
-				      <td>Cell</td>
-				      <td>Cell</td>
-				      <td><button class="ui red button">删除</button><button class="ui teal button">审核</button></td>
-				    </tr>
-				    <tr>
-				      <td>Cell</td>
-				      <td>Cell</td>
-				      <td>Cell</td>
-				      <td>Cell</td>
-				      <td>Cell</td>
-				      <td>Cell</td>
-				      <td><button class="ui red button">删除</button><button class="ui teal button">审核</button></td>
-				    </tr>
+				    </c:forEach>
 				  </tbody>
 				  <tfoot>
 				    <tr><th colspan="7">
-				      <div class="ui right floated pagination menu">
+				      <!-- <div class="ui right floated pagination menu">
 				        <a class="icon item">
 				          <i class="left chevron icon"></i>
 				        </a>
@@ -129,7 +117,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				        <a class="icon item">
 				          <i class="right chevron icon"></i>
 				        </a>
-				      </div>
+				      </div> -->
 				    </th>
 				  </tr></tfoot>
 				</table>
@@ -151,37 +139,24 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				  	<th>操作</th>
 				  </tr></thead>
 				  <tbody>
-				    <tr>
-				     <td>Cell</td>
-				      <td>Cell</td>
-				      <td>Cell</td>
-				      <td>Cell</td>
-				      <td>Cell</td>
-				      <td>Cell</td>
-				      <td><button class="ui red button">删除</button><button class="ui teal button">审核</button></td>
-				    </tr>
-				    <tr>
-				      <td>Cell</td>
-				      <td>Cell</td>
-				      <td>Cell</td>
-				      <td>Cell</td>
-				      <td>Cell</td>
-				      <td>Cell</td>
-				      <td><button class="ui red button">删除</button><button class="ui teal button">审核</button></td>
-				    </tr>
-				    <tr>
-				      <td>Cell</td>
-				      <td>Cell</td>
-				      <td>Cell</td>
-				      <td>Cell</td>
-				      <td>Cell</td>
-				      <td>Cell</td>
-				      <td><button class="ui red button">删除</button><button class="ui teal button">审核</button></td>
-				    </tr>
+				  <c:forEach  items="${uwa}" var="uwa">
+					    <tr>
+					      <td>${uwa.getUName()}</td>
+					      <td>${uwa.getUEmail()}</td>
+					      <td>${uwa.getURegDate()}</td>
+					      <td>${uwa.getUState()}</td>
+					      <td>${uwa.getUPoint()}</td>
+					      <td>${uwa.getUIsSectioner()}</td>
+					      <td>
+						      <button onclick="du('${uwa.getUName()}')" class="ui red button">删除</button>
+						      <button  class="ui teal button" onclick="sm('${uwa.getUName()}')">设定版主</button>
+					      </td>
+					    </tr>
+				  </c:forEach>
 				  </tbody>
 				  <tfoot>
 				    <tr><th colspan="7">
-				      <div class="ui right floated pagination menu">
+				      <!-- <div class="ui right floated pagination menu">
 				        <a class="icon item">
 				          <i class="left chevron icon"></i>
 				        </a>
@@ -190,7 +165,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				        <a class="item">3</a>
 				        <a class="item">4</a>
 				        <a class="icon item">
-				          <i class="right chevron icon"></i>
+				          <i class="right chevron icon"></i> -->
 				        </a>
 				      </div>
 				    </th>
@@ -225,7 +200,75 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		
 		<script type="text/javascript">
 			$('.ui.dropdown').dropdown();
-		
+		 /* 设定版主 */
+			function sm(uname){
+				$.ajax({
+					type:"post",
+					url:"${basePath}/bbs/admin/set",
+					data:{"uname":uname},
+					success:function(data){
+						if(data=="success"){
+						window.location.href = "${basePath}/bbs/admin/setmoderator";
+						}else if(data=="isNull"){
+							alert("评论出错");
+							$("#texts").val("");
+						}
+					}
+				});
+			};
+			/* 删除用户 */
+		function du(uname){
+				$.ajax({
+					type:"post",
+					url:"${basePath}/bbs/admin/deleteuser",
+					data:{"uname":uname},
+					success:function(data){
+						if(data=="success"){
+						window.location.href = "${basePath}/bbs/admin";
+						}else if(data=="isNull"){
+							alert("用户已经删除");
+							$("#texts").val("");
+						}
+					}
+				});
+			};
+			/* 删除帖子 */
+		function dt(TTopic,TID,UName){
+				$.ajax({
+					type:"post",
+					url:"${basePath}/bbs/admin/deletetopic",
+					data:{"TTopic":TTopic,
+					"TID":TID,
+					"UName":UName},
+					success:function(data){
+						if(data=="success"){
+						window.location.href = "${basePath}/bbs/admin";
+						}else if(data=="isNull"){
+							alert("帖子已经删除");
+							$("#texts").val("");
+						}
+					}
+				});
+			};
+			/* 审核帖子 */
+		function ut(TTopic,TID,UName){
+				$.ajax({
+					type:"post",
+					url:"${basePath}/bbs/admin/updatetopic",
+					data:{"TTopic":TTopic,
+					"TID":TID,
+					"UName":UName},
+					success:function(data){
+						if(data=="success"){
+						window.location.href = "${basePath}/bbs/admin";
+						}else if(data=="isNull"){
+							alert("帖子已经审核");
+							$("#texts").val("");
+						}
+					}
+				});
+			};
+			
 		var vm = new Vue({
 			el:"#box",
 			data:{

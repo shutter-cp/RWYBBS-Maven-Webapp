@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+ <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"   
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.rwybbs.dao.RwyAdminDao">
+
+	
+	<select id="uwa"  resultType="com.rwybbs.bean.UsersWithAdmin">
+		SELECT
+			UName,UPassword,UEmail,DATE_FORMAT(URegDate,"%Y-%m-%d") URegDate,UState,UPoint,UIsSectioner
+		FROM
+			bbsuser
+		WHERE
+			UState=1;
+	</select>
+	<select id="uwas" parameterType="String" resultType="com.rwybbs.bean.UsersWithAdmin">
+		SELECT
+			UName,UPassword,UEmail,DATE_FORMAT(URegDate,"%Y-%m-%d") URegDate,UState,UPoint,UIsSectioner
+		FROM
+			bbsuser
+		WHERE
+			UState=1 and UName LIKE '%#{UName}%'
+	</select>
+	<select id="uwad"  parameterType="com.rwybbs.bean.UsersWithAdmin">
+		UPDATE 
+			bbsuser
+		SET 
+			UState = 0
+		WHERE 
+			UName = #{UName}
+		
+	</select>
+	<select id="twa" resultType="com.rwybbs.bean.TopicWithAdmin">
+		SELECT
+			TTopic,SName,UName,DATE_FORMAT(URegDate,"%Y-%m-%d") TTime,TFlag,TID
+		FROM
+			bbstopic,bbsuser,bbsforum
+		WHERE
+			TSID=SID and
+			TUID=UID
+	</select>
+	<select id="twas" parameterType="String" resultType="com.rwybbs.bean.TopicWithAdmin">
+		SELECT
+			TTopic,SName,UName,DATE_FORMAT(URegDate,"%Y-%m-%d") TTime,TFlag,TID
+		FROM
+			bbstopic,bbsuser,bbsforum
+		WHERE
+			TSID=SID and
+			TUID=UID and
+			TTopic LIKE '%#{TTopic}%'
+	</select>
+	<select id="twad"  parameterType="com.rwybbs.bean.TopicWithAdmin">
+		DELETE 
+		FROM 
+			bbstopic
+		WHERE 
+			TTopic=#{TTopic} and
+			TID=#{TID} and
+			TUID in (SELECT UID FROM bbsuser WHERE UName=#{UName})
+	</select>
+	<select id="twau"  parameterType="com.rwybbs.bean.TopicWithAdmin">
+		UPDATE 
+			bbstopic
+		SET 
+			TFlag = 1
+		WHERE 
+			TTopic=#{TTopic} and
+			TID=#{TID} and
+			TUID in (SELECT UID FROM bbsuser WHERE UName=#{UName})
+	</select>
+	<select id="twm" parameterType="String" resultType="com.rwybbs.bean.TopicWithAdmin">
+		SELECT
+			TTopic,SName,UName,DATE_FORMAT(URegDate,"%Y-%m-%d") TTime,TFlag,TID
+		FROM
+			bbstopic,bbsuser,bbsforum
+		WHERE
+			TSID=SID and
+			TUID=UID and
+			SName in(SELECT SName FROM bbsforum WHERE SMasterID in
+			(SELECT UID FROM bbsuser WHERE UName=#{UName}))
+	</select>
+	<select id="twms" parameterType="com.rwybbs.bean.TopicWithAdmin" resultType="com.rwybbs.bean.TopicWithAdmin">
+		SELECT
+			TTopic,SName,UName,DATE_FORMAT(URegDate,"%Y-%m-%d") TTime,TFlag,TID
+		FROM
+			bbstopic,bbsuser,bbsforum
+		WHERE
+			TSID=SID and
+			TUID=UID and
+			SName in(SELECT SName FROM bbsforum WHERE SMasterID in
+			(SELECT UID FROM bbsuser WHERE UName=#{UName})) and
+			TTopic LIKE '%#{TTopic}%'
+	</select>
+</mapper>  

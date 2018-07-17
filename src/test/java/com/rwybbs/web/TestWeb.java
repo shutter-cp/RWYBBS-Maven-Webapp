@@ -64,53 +64,58 @@ public class TestWeb {
 	}
 	
 	
-	@RequestMapping("/bbs/index")
+	@RequestMapping("/test/bbs/index")
 	public ModelAndView test4(){
 		ModelAndView andView = new ModelAndView();
 		andView.setViewName("bbs/bbsindex");
 		return andView;
 	}
-	@RequestMapping("/bbs/note")
+	@RequestMapping("/test/bbs/note")
 	public ModelAndView test5(){
 		ModelAndView andView = new ModelAndView();
 		andView.setViewName("bbs/bbsnote");
 		return andView;
 	}
-	@RequestMapping("/bbs/write")
+	@RequestMapping("/test/bbs/write")
 	public ModelAndView test6(){
 		ModelAndView andView = new ModelAndView();
 		andView.setViewName("bbs/bbswrite");
 		return andView;
 	}
-	@RequestMapping("/bbs/adduser")
+	@RequestMapping("/test/bbs/adduser")
 	public ModelAndView test7(){
 		ModelAndView andView = new ModelAndView();
 		andView.setViewName("bbs/bbsadduser");
 		return andView;
 	}
-	@RequestMapping("/bbs/list")
+	@RequestMapping("/test/bbs/list")
 	public ModelAndView test8(){
 		ModelAndView andView = new ModelAndView();
 		andView.setViewName("bbs/bbslist");
 		return andView;
 	}
-	@RequestMapping("/bbs/admin")
+	@RequestMapping("/test/bbs/admin")
 	public ModelAndView test9(){
 		ModelAndView andView = new ModelAndView();
 		andView.setViewName("bbs/bbsadmin");
 		return andView;
 	}
-	@RequestMapping("/bbs/moderator")
+	@RequestMapping("/test/bbs/moderator")
 	public ModelAndView test10(){
 		ModelAndView andView = new ModelAndView();
 		andView.setViewName("bbs/bbsmoderator");
 		return andView;
 	}
-	@RequestMapping("/bbs/userindex")
+	@RequestMapping("/test/bbs/userindex")
 	public ModelAndView test11(){
 		ModelAndView andView = new ModelAndView();
 		andView.setViewName("bbs/bbsuserindex");
 		return andView;
 	}
-	
+	@RequestMapping("/test/bbs/setmoderator")
+	public ModelAndView test12(){
+		ModelAndView andView = new ModelAndView();
+		andView.setViewName("bbs/setmoderator");
+		return andView;
+	}
 }

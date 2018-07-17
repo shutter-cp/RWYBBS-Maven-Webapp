@@ -63,35 +63,78 @@
 .ui.text.menu.title-main-right a:hover {
 	color: white;
 }
-/*主体*/
+/*涓讳綋*/
 .ui.grid.container.main{
 	margin-top: 30px;
 }
 .lists {
 	color: #000000;
 	padding: 7px;
-	font-family: "微软雅黑";
+	font-family: "寰蒋闆呴粦";
+	margin:0 auto;
 }
-
-.listtitle {
-	font-family: "微软雅黑"
+.listsson{
+	color: #000000;
+	font-family: "寰蒋闆呴粦";
+	font-size:12px;
+	padding-left: 20px;
+	padding-bottom: 5px;
+}
+.listsson:hover{
+	background: #db2828;
+	color: #ffffff;
+	border-radius:5px;
+}
+.listtitle{
+	font-family: "寰蒋闆呴粦"
 }
 .ui.red.button.addbutton{
-	font-family: "微软雅黑"
+	font-family: "寰蒋闆呴粦"
 }
 .nodenum {
 	float: right;
 }
+.master{
+	float: left;
+	color: #000000;
+	padding: 5px;
+}
+.Statement{
 
+}
+.master:hover{
+	background: #db2828;
+	color: #ffffff;
+	border-radius:5px
+}
+.ui.vertical.segment.onetopic{
+	padding:50px;
+}
+.ui.vertical.segment.onetopic>a{
+	color: #000000;
+}
+.ui.vertical.segment.onetopic>a:hover{
+	color: #db2828;
+}
+.timeandauthor>a{
+	color: #000000;
+}
+.timeandauthor>a:hover{
+	color: #db2828;
+}
+.timeandauthor{
+	float:right;
+}
 .ui.raised.segment.ritghttitle {
-	height: 100px;
-	font-family: "微软雅黑"
+	height: 300px;
+	font-family: "寰蒋闆呴粦";
+	
 }
 
 .ui.pagination.menu.pagebutton {
 	float: right;
 }
-/*脚部*/
+/*鑴氶儴*/
 
 .ui.segment.basic.vertical {
 	margin: 0 auto;
