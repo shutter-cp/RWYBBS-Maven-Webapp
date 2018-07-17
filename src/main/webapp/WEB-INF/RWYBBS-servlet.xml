@@ -34,7 +34,9 @@
 		<mvc:interceptor>
 			<mvc:mapping path="/bbs/**"/>
 			<mvc:exclude-mapping path="/bbs/moderator/**"/>
+			<mvc:exclude-mapping path="/bbs/moderator**"/>
 			<mvc:exclude-mapping path="/bbs/admin/**"/>
+			<mvc:exclude-mapping path="/bbs/admin**"/>
 			<bean class="com.rwybbs.core.LoginCore"></bean>
 		</mvc:interceptor>
 	</mvc:interceptors>

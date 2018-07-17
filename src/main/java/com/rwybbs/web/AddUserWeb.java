@@ -44,7 +44,7 @@ public class AddUserWeb {
 			String satement
 			){
 		ModelAndView andView = new ModelAndView(
-				"redirect:/login？username="+uname);
+				"redirect:/login?username="+uname);
 		
 		
 		BbsUser bbsUser = new BbsUser();

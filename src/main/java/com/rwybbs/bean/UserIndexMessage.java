@@ -10,6 +10,7 @@ package com.rwybbs.bean;
  */
 
 public class UserIndexMessage {
+	private Integer rtid;
 	private String rcontent;
 	private String rtime;
 	public String getRcontent() {
@@ -24,4 +25,11 @@ public class UserIndexMessage {
 	public void setRtime(String rtime) {
 		this.rtime = rtime;
 	}
+	public Integer getRtid() {
+		return rtid;
+	}
+	public void setRtid(Integer rtid) {
+		this.rtid = rtid;
+	}
+	
 }

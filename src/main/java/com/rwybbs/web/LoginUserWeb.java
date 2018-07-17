@@ -50,6 +50,10 @@ public class LoginUserWeb {
 	public ModelAndView login(@RequestParam("username")
 					String username){
 		ModelAndView andView = new ModelAndView();
+		if (username=="") {
+			return new ModelAndView("redirect:http://47.95.220.233/RWY/index.jsp");
+		}
+		
 		LoginChact user = loginUserService.loginCheck(username);
 		//bbs数据库查到值就进login页面
 		if (user!=null) {
@@ -68,7 +72,7 @@ public class LoginUserWeb {
 		andView.setViewName("404");
 		return andView;
 	}
-	
+		
 	/**
 	 * 登陆
 	 * 方法名：loginDo

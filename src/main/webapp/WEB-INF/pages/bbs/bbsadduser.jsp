@@ -16,11 +16,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<meta http-equiv="expires" content="0">    
 	<meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
 	<meta http-equiv="description" content="This is my page">
-	<link rel="stylesheet" type="text/css" href="${basePath}/css/semantic.css"/>
 	<link rel="stylesheet" type="text/css" href="${basePath}/css/bbs/bbsadduser.css" />
-	<script src="${basePath}/js/jquery.min.js" type="text/javascript" charset="utf-8"></script>
-	<script src="${basePath}/js/semantic.js" type="text/javascript" charset="utf-8"></script>
-	<script src="${basePath}/js/vue1.js" type="text/javascript" charset="utf-8"></script>
+	<%@include file="/common/context.jsp" %>
 	<!--
 	<link rel="stylesheet" type="text/css" href="styles.css">
 	-->
@@ -31,7 +28,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		<!--  ==========  -->
 		<!--  =   标题      =  -->
 		<!--  ==========  -->
-		<div class="ui segment fixed basic menu">
+		<div class="ui segment fixed basic menu animated fadeInDown">
 			<div class="title-main">
 				<div class="ui image title-main-left">
 					<a href="http://47.95.220.233/RWY/index.jsp">
@@ -43,7 +40,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				</div>
 				<div class="ui text menu title-main-right">
 					<div class="right item">
-						<a href="#">
+						<a href="${basePath}/bbs/bbsuserindex">
 							<div class="but">
 								${user.getUname()}
 							</div>
@@ -63,7 +60,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		<!--  =   主体      =  -->
 		<!--  ==========  -->
 		<form action="${basePath}/addUserDo" method="post" class="ui form">
-			<div class="ui basic segment vertical main">
+			<div class="ui basic segment vertical main  animated rubberband">
 				<div class="ui raised very padded segment">
 					<h1 class="ui header"><i class="ui red icon write square"></i>请完善你的个人信息</h1>
 					<!--不可编辑的信息-->

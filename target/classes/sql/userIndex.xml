@@ -34,6 +34,7 @@
 	<!-- 我的消息 -->
 	<select id="userIndexMessage"  parameterType="Integer"  resultType="com.rwybbs.bean.UserIndexMessage">
 		SELECT
+			rtid,
 			rcontent,
 			DATE_FORMAT(rtime,'%y/%m/%d') rtime
 		FROM

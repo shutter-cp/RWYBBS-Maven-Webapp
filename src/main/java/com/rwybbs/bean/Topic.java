@@ -1,6 +1,5 @@
 package com.rwybbs.bean;
 
-import java.util.Date;
 
 public class Topic {
 	private Integer SID;

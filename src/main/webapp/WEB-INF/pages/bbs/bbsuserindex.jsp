@@ -17,11 +17,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<meta http-equiv="expires" content="0">    
 	<meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
 	<meta http-equiv="description" content="This is my page">
-	<link rel="stylesheet" type="text/css" href="${basePath}/css/semantic.css"/>
 	<link rel="stylesheet" type="text/css" href="${basePath}/css/bbs/bbsuserindex.css" />
-	<script src="${basePath}/js/jquery.min.js" type="text/javascript" charset="utf-8"></script>
-	<script src="${basePath}/js/semantic.js" type="text/javascript" charset="utf-8"></script>
-	<script src="${basePath}/js/vue1.js" type="text/javascript" charset="utf-8"></script>
+	<%@include file="/common/context.jsp" %>
 	<!--
 	<link rel="stylesheet" type="text/css" href="styles.css">
 	-->
@@ -32,7 +29,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		<!--  ==========  -->
 		<!--  =   标题      =  -->
 		<!--  ==========  -->
-		<div class="ui segment fixed basic menu">
+		<div class="ui segment fixed basic menu animated fadeInDown">
 			<div class="title-main">
 				<div class="ui image title-main-left">
 					<a href="http://47.95.220.233/RWY/index.jsp">
@@ -44,7 +41,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				</div>
 				<div class="ui text menu title-main-right">
 					<div class="right item">
-						<a href="#">
+						<a href="${basePath}/bbs/bbsuserindex">
 							<div class="but">
 								${username}
 							</div>
@@ -66,7 +63,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		
 		<!--个人中心-->
 		<div class="ui basic segment vertical main">
-			<div class="ui raised very padded segment">
+			<div class="ui raised very padded segment animated zoomInDown">
 				<div class="ui grid">
 					<div class="three wide conten">
 						<div class="ui image">
@@ -94,7 +91,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			</div>
 				<div class="ui grid">
 					<div class="twelve wide column">
-						<div class="ui raised very padded segment">
+						<div class="ui raised very padded segment animated zoomInLeft">
 							<a class="ui red ribbon label"><h3>我的帖子</h3></a><br /><br />
 								<p></p>
 							<table class="ui fixed table">
@@ -110,10 +107,18 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 									<c:forEach items="${articleList}" var="article">
 										<tr>
 											<td>${article.getTid()}</td>
-											<td>${article.getTtopic()}</td>
+											<td>
+												<a href="${basePath}/bbs/note/${article.getTid()}">
+													${article.getTtopic()}
+												</a>
+											</td>
 											<td>${article.getTtime()}</td>
 											<td>
-												<button  class="ui button teal" >修改</button>
+												<a href="${basePath}/bbs/upwrite/${article.getTid()}">
+													<button class="ui button teal" >
+														修改
+													</button>
+												</a>
 												<button onclick="deletes('${article.getTid()}')" class="ui button red" >删除</button>
 											</td>
 										</tr>
@@ -122,15 +127,17 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 							</table>
 						</div>
 					</div>
-					<div class="four wide column">
+					<div class="four wide column animated zoomInRight">
 						<div class="ui raised very padded segment">
 							<h3 class="ui header"><i class="red announcement icon"></i>我的消息</h3>
 							<div class="ui very padded">
 								<c:forEach items="${messageList}" var="message">
-									<p>
+								<p>
+									<a href="${basePath}/bbs/note/${message.getRtid()}">
 										<i class="ui icon book"></i>${message.getRcontent()}
 										<span style="float: right;">${message.getRtime()}</span>
-									</p>
+									</a>
+								</p>
 								</c:forEach>	
 							</div>
 						</div>
@@ -164,20 +171,23 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		
 		<script type="text/javascript">
 			function deletes(no){
-				$.ajax({
-					type:"post",
-					url:"${basePath}/bbs/bbsuserindex/deletes",
-					data:{"no":no},
-					success:function(data){
-						if(data=="success"){
-							alert('确认删除?')
-							location.reload();
-						}else if(data=="isNull"){
-							alert("评论出错");
-							$("#texts").val("");
-						}
+				var a = confirm('是否删除？');
+					if(a){
+						$.ajax({
+							type:"post",
+							url:"${basePath}/bbs/bbsuserindex/deletes",
+							data:{"no":no},
+							success:function(data){
+								if(data=="success"){
+									alert('确认删除?')
+									location.reload();
+								}else if(data=="isNull"){
+									alert("评论出错");
+									$("#texts").val("");
+								}
+							}
+						});
 					}
-				});
 			};
 		
 		</script>

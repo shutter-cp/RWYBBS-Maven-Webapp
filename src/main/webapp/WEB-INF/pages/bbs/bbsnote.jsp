@@ -17,11 +17,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<meta http-equiv="expires" content="0">    
 	<meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
 	<meta http-equiv="description" content="This is my page">
-	<link rel="stylesheet" type="text/css" href="${basePath}/css/semantic.css"/>
 	<link rel="stylesheet" type="text/css" href="${basePath}/css/bbs/bbsnote.css" />
-	<script src="${basePath}/js/jquery.min.js" type="text/javascript" charset="utf-8"></script>
-	<script src="${basePath}/js/semantic.js" type="text/javascript" charset="utf-8"></script>
-	<script src="${basePath}/js/vue1.js" type="text/javascript" charset="utf-8"></script>
+	<%@include file="/common/context.jsp" %>
 	<!--
 	<link rel="stylesheet" type="text/css" href="styles.css">
 	-->
@@ -32,7 +29,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		<!--  ==========  -->
 		<!--  =   标题      =  -->
 		<!--  ==========  -->
-		<div class="ui segment fixed basic menu">
+		<div class="ui segment fixed basic menu animated fadeInDown">
 			<div class="title-main">
 				<div class="ui image title-main-left">
 					<a href="http://47.95.220.233/RWY/index.jsp">
@@ -44,7 +41,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				</div>
 				<div class="ui text menu title-main-right">
 					<div class="right item">
-						<a href="#">
+						<a href="${basePath}/bbs/bbsuserindex">
 							<div class="but">
 								${username}
 							</div>
@@ -66,7 +63,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		<div class="ui segment basic vertical main">
 			<div class="ui grid">
 				<!--左边-->
-				<div  id="text"  class="twelve wide column">
+				<div  id="text"  class="twelve wide column animated zoomInLeft">
 					<!--这里是标题-->
 					<div class="ui raised very padded segment ">
 						<div class="ui two column grid">
@@ -84,7 +81,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 						${note.getTcontents()}
 					</div>
 					<!--回帖-->
-					<div class="ui raised segment very padded">
+					<div class="ui raised segment very padded animated zoomInLeft">
 						<div class="ui comments reply">
 							<h3 class="ui dividing header">评论</h3>
 							
@@ -115,15 +112,11 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 									您还可以输入：{{200-texts.length}}个字
 								</div>
 							</form>
-							
-							
-							
-							
 						</div>
 					</div>
 				</div>
 				<!--右边-->
-				<div class="four wide column">
+				<div class="four wide column animated zoomInRight">
 					<div class="ui raised segment ">
 						<h3><i class="ui icon large flag red outline"></i>个人资料</h3>
 						<div class="ui segment vertical basic center aligned ">
@@ -135,9 +128,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 							</div>
 							<p>U币：${note.getGupoint()}</p>
 						</div>
-						
-						
-						
 					</div>
 					<div class="ui raised segment ">
 						<h3><i class="ui icon large red book"></i>最新帖子</h3>
@@ -169,9 +159,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				</div>
 			</div>
 		</div>
-		
-		
-		
 		<!--  ==========  -->
 		<!--  =   底部      =  -->
 		<!--  ==========  -->
@@ -196,7 +183,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				</div>
 			</div>
 		</div>
-		
 		<script type="text/javascript">
 			$('.ui.sticky')
 			  .sticky({

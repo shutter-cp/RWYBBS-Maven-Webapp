@@ -17,11 +17,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<meta http-equiv="expires" content="0">    
 	<meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
 	<meta http-equiv="description" content="This is my page">
-	<link rel="stylesheet" type="text/css" href="${basePath}/css/semantic.css"/>
+	
 	<link rel="stylesheet" type="text/css" href="${basePath}/css/bbs/bbsindex.css" />
-	<script src="${basePath}/js/jquery.min.js" type="text/javascript" charset="utf-8"></script>
-	<script src="${basePath}/js/semantic.js" type="text/javascript" charset="utf-8"></script>
-	<script src="${basePath}/js/vue1.js" type="text/javascript" charset="utf-8"></script>
+	<%@include file="/common/context.jsp" %>
+
 	<!--
 	<link rel="stylesheet" type="text/css" href="styles.css">
 	-->
@@ -32,7 +31,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		<!--  ==========  -->
 		<!--  =   标题      =  -->
 		<!--  ==========  -->
-		<div class="ui segment fixed basic menu">
+		<div class="ui segment fixed basic menu animated fadeInDown">
 			<div class="title-main">
 				<div class="ui image title-main-left">
 					<a href="http://47.95.220.233/RWY/index.jsp">
@@ -44,7 +43,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				</div>
 				<div class="ui text menu title-main-right">
 					<div class="right item">
-						<a href="#">
+						<a href="${basePath}/bbs/bbsuserindex">
 							<div class="but">
 								${username}
 							</div>
@@ -66,14 +65,14 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		<div class="ui segment vertical basic main">
 			<!--第一部分-->
 			<div class="ui grid ">
-				<div class="eight wide column">
+				<div class="eight wide column animated zoomInLeft">
 					<div class="ui raised segment t1">
 						<div class="ui image">
 							<img src="${basePath}/img/bbs/index/bbsindex.jpg"/>
 						</div>
 					</div>
 				</div>
-				<div class="four wide column">
+				<div class="four wide column animated zoomInRight">
 					<div class="ui raised segment t1">
 						<h3 class="ui header">
 						   <i class="announcement icon"></i>
@@ -92,7 +91,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 						</c:forEach>
 					</div>
 				</div>
-				<div class="four wide column">
+				<div class="four wide column animated zoomInRight">
 					<div class="ui raised segment t1">
 						<h3 class="ui header">
 						   <i class="signal icon"></i>
@@ -114,7 +113,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			</div>
 			<!--全景业界资讯-->
 			
-			<div class="ui raised segment">
+			<div class="ui raised segment animated zoomInUp">
 				<h2 class="ui header">
 				   	<i class="feed icon"></i>
 				   	<div class="content">
@@ -128,7 +127,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				<div class="ui grid">
 					<c:forEach items="${fourmList1}" var="fourm">
 						<div class="four wide column">
-							<a href="${basePath}/bbs/aaa/${fourm.getSid()}">
+							<a href="${basePath}/bbs/Forumlist/全景业界资讯/${fourm.getSid()}/1">
 								<div class="ui image lf">
 									<img src="${basePath}/img/bbs/index/s1.png"/>
 								</div>
@@ -143,7 +142,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				</div>
 			</div>
 			<!--全景作品-->
-			<div class="ui raised segment">
+			<div class="ui raised segment animated zoomInUp">
 				<h2 class="ui header">
 				   	<i class="world icon"></i>
 				   	<div class="content">
@@ -157,7 +156,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				<div class="ui grid">
 					<c:forEach items="${fourmList2}" var="fourm">
 						<div class="four wide column">
-							<a href="${basePath}/bbs/aaa/${fourm.getSid()}">
+							<a href="${basePath}/bbs/Forumlist/全景作品/${fourm.getSid()}/1">
 								<div class="ui image lf">
 									<img src="${basePath}/img/bbs/index/s2.png"/>
 								</div>
@@ -173,7 +172,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				</div>
 			</div>
 			<!--生活纪实-->
-			<div class="ui raised segment">
+			<div class="ui raised segment animated zoomInUp">
 				<h2 class="ui header">
 				   	<i class="map icon"></i>
 				   	<div class="content">
@@ -187,7 +186,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				<div class="ui grid">
 					<c:forEach items="${fourmList3}" var="fourm">
 						<div class="four wide column">
-							<a href="${basePath}/bbs/aaa/${fourm.getSid()}">
+							<a href="${basePath}/bbs/Forumlist/生活纪实/${fourm.getSid()}/1">
 								<div class="ui image lf">
 									<img src="${basePath}/img/bbs/index/s3.png"/>
 								</div>
@@ -203,7 +202,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				</div>
 			</div>
 			<!--全景学苑-->
-			<div class="ui raised segment">
+			<div class="ui raised segment animated zoomInUp">
 				<h2 class="ui header">
 				   	<i class="university icon"></i>
 				   	<div class="content">
@@ -217,7 +216,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				<div class="ui grid">
 					<c:forEach items="${fourmList4}" var="fourm">
 						<div class="four wide column">
-							<a href="${basePath}/bbs/aaa/${fourm.getSid()}">
+							<a href="${basePath}/bbs/Forumlist/全景学苑/${fourm.getSid()}/1">
 								<div class="ui image lf">
 									<img src="${basePath}/img/bbs/index/s1.png"/>
 								</div>
@@ -233,7 +232,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				</div>
 			</div>
 			<!--资源下载-->
-			<div class="ui raised segment">
+			<div class="ui raised segment animated zoomInUp">
 				<h2 class="ui header">
 				   	<i class="folder open icon"></i>
 				   	<div class="content">
@@ -247,7 +246,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				<div class="ui grid">
 					<c:forEach items="${fourmList5}" var="fourm">
 						<div class="four wide column">
-							<a href="${basePath}/bbs/aaa/${fourm.getSid()}">
+							<a href="${basePath}/bbs/Forumlist/资源下载/${fourm.getSid()}/1">
 								<div class="ui image lf">
 									<img src="${basePath}/img/bbs/index/s2.png"/>
 								</div>
@@ -263,7 +262,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				</div>
 			</div>
 			<!--交流分享-->
-			<div class="ui raised segment">
+			<div class="ui raised segment animated fadeInUp">
 				<h2 class="ui header">
 				   	<i class="users icon"></i>
 				   	<div class="content">
@@ -277,7 +276,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				<div class="ui grid">
 					<c:forEach items="${fourmList6}" var="fourm">
 						<div class="four wide column">
-							<a href="${basePath}/bbs/aaa/${fourm.getSid()}">
+							<a href="${basePath}/bbs/Forumlist/交流分享/${fourm.getSid()}/1">
 								<div class="ui image lf">
 									<img src="${basePath}/img/bbs/index/s3.png"/>
 								</div>

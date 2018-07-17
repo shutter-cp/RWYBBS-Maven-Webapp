@@ -17,11 +17,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<meta http-equiv="expires" content="0">    
 	<meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
 	<meta http-equiv="description" content="This is my page">
-	<link rel="stylesheet" type="text/css" href="${basePath}/css/semantic.css"/>
 	<link rel="stylesheet" type="text/css" href="${basePath}/css/bbs/bbsadmin.css" />
-	<script src="${basePath}/js/jquery.min.js" type="text/javascript" charset="utf-8"></script>
-	<script src="${basePath}/js/semantic.js" type="text/javascript" charset="utf-8"></script>
-	<script src="${basePath}/js/vue1.js" type="text/javascript" charset="utf-8"></script>
+	<%@include file="/common/context.jsp" %>
 	<!--
 	<link rel="stylesheet" type="text/css" href="styles.css">
 	-->
@@ -46,14 +43,14 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					<div class="right item">
 						<a href="#">
 							<div class="but">
-								username
+								${admin}
 							</div>
 						</a>
 					</div>
 					<div class="right item but">
-						<a href="#">
+						<a href="http://47.95.220.233/RWY/index.jsp">
 							<div class="but">
-								论坛
+								RWY首页
 							</div>
 						</a>
 					</div>
@@ -74,8 +71,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			</div>
 			<div class="ui bottom attached segment" v-if="show==1">
 				<div class="ui transparent icon input searchbotton">
-			        <input type="text" placeholder="搜索帖子……">
-			        <i class="red search link icon"></i>
+			        <input id="foundTopicText" type="text" placeholder="搜索帖子……">
+			        <i onclick="foundTopic()" class="red search link icon"></i>
 			    </div>
 			   	<br /><br />
 			   <table class="ui celled table">
@@ -90,18 +87,18 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				    <th>操作</th>
 				  </tr>
 				  </thead>
-				  <tbody>
+				  <tbody id="mainContent">
 				  <c:forEach  items="${twa}" var="twa">
-				    <tr>
-				      <td>${twa.getTID()}</td>
-				      <td>${twa.getTTopic()}</td>
-				      <td>${twa.getSName()}</td>
-				      <td>${twa.getUName()}</td>
-				      <td>${twa.getTTime()}</td>
-				      <td>${twa.getTFlag()}</td>
-				      <td><button onclick="dt('${twa.getTTopic()}','${twa.getTID()}','${twa.getUName()}')"  class="ui red button">删除</button>
-				      <button onclick="ut('${twa.getTTopic()}','${twa.getTID()}','${twa.getUName()}')" class="ui teal button">审核</button></td>
-				    </tr>
+					    <tr>
+					      <td>${twa.getTID()}</td>
+					      <td>${twa.getTTopic()}</td>
+					      <td>${twa.getSName()}</td>
+					      <td>${twa.getUName()}</td>
+					      <td>${twa.getTTime()}</td>
+					      <td>${twa.getTFlag()}</td>
+					      <td><button onclick="dt('${twa.getTTopic()}','${twa.getTID()}','${twa.getUName()}')"  class="ui red button">删除</button>
+					      <button onclick="ut('${twa.getTTopic()}','${twa.getTID()}','${twa.getUName()}')" class="ui teal button">审核</button></td>
+					    </tr>
 				    </c:forEach>
 				  </tbody>
 				  <tfoot>
@@ -124,8 +121,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			</div>
 			<div class="ui bottom attached segment" v-if="show==2">
 				<div class="ui transparent icon input searchbotton">
-			        <input type="text" placeholder="搜索用户……">
-			        <i class="red search link icon"></i>
+			        <input id="foundUserText" type="text" placeholder="搜索用户……">
+			        <i onclick="foundUser()" class="red search link icon"></i>
 			    </div>
 			   	<br /><br />
 			   <table class="ui celled table">
@@ -138,7 +135,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				    <th>是否版主</th>
 				  	<th>操作</th>
 				  </tr></thead>
-				  <tbody>
+				  <tbody id="mainContents">
 				  <c:forEach  items="${uwa}" var="uwa">
 					    <tr>
 					      <td>${uwa.getUName()}</td>
@@ -218,57 +215,111 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			};
 			/* 删除用户 */
 		function du(uname){
-				$.ajax({
-					type:"post",
-					url:"${basePath}/bbs/admin/deleteuser",
-					data:{"uname":uname},
-					success:function(data){
-						if(data=="success"){
-						window.location.href = "${basePath}/bbs/admin";
-						}else if(data=="isNull"){
-							alert("用户已经删除");
-							$("#texts").val("");
+		var a = confirm('是否删除该用户？');
+				if(a){
+					$.ajax({
+						type:"post",
+						url:"${basePath}/bbs/admin/deleteuser",
+						data:{"uname":uname},
+						success:function(data){
+							if(data=="success"){
+							window.location.href = "${basePath}/bbs/admin";
+							}else if(data=="isNull"){
+								alert("用户已经删除");
+								$("#texts").val("");
+							}
 						}
-					}
-				});
-			};
+					});
+				}
+		};
 			/* 删除帖子 */
 		function dt(TTopic,TID,UName){
-				$.ajax({
-					type:"post",
-					url:"${basePath}/bbs/admin/deletetopic",
-					data:{"TTopic":TTopic,
-					"TID":TID,
-					"UName":UName},
-					success:function(data){
-						if(data=="success"){
-						window.location.href = "${basePath}/bbs/admin";
-						}else if(data=="isNull"){
-							alert("帖子已经删除");
-							$("#texts").val("");
+		var a = confirm('是否删除该帖子？');
+				if(a){
+					$.ajax({
+						type:"post",
+						url:"${basePath}/bbs/admin/deletetopic",
+						data:{"TTopic":TTopic,
+						"TID":TID,
+						"UName":UName},
+						success:function(data){
+							if(data=="success"){
+							window.location.href = "${basePath}/bbs/admin";
+							}else if(data=="isNull"){
+								alert("帖子已经删除");
+								$("#texts").val("");
+							}
 						}
-					}
-				});
+					});
+				}
 			};
 			/* 审核帖子 */
 		function ut(TTopic,TID,UName){
-				$.ajax({
-					type:"post",
-					url:"${basePath}/bbs/admin/updatetopic",
-					data:{"TTopic":TTopic,
-					"TID":TID,
-					"UName":UName},
-					success:function(data){
-						if(data=="success"){
-						window.location.href = "${basePath}/bbs/admin";
-						}else if(data=="isNull"){
-							alert("帖子已经审核");
-							$("#texts").val("");
+		var a = confirm('是否审核该帖子？');
+				if(a){
+					$.ajax({
+						type:"post",
+						url:"${basePath}/bbs/admin/updatetopic",
+						data:{"TTopic":TTopic,
+						"TID":TID,
+						"UName":UName},
+						success:function(data){
+							if(data=="success"){
+							window.location.href = "${basePath}/bbs/admin";
+							}else if(data=="isNull"){
+								alert("帖子已经审核");
+								$("#texts").val("");
+							}
 						}
-					}
+					});
+				}
+			};
+			/* 搜索用户 */
+			function foundUser(){
+				var text = $('#foundUserText').val();
+				var url = "${basePath}/bbs/admin/founduser";
+				$.ajax({
+					type : "post",
+					async : false,  //同步请求
+					url : url,
+					data :{
+						"UName":text
+					},
+					timeout:1000,
+					success:function(dates){
+						/* alert(dates); */
+						$("#mainContents *").remove();//清空之前的div
+						$("#mainContents").html(dates);//要刷新的div
+					},
+					error: function() {
+		               // alert("失败，请稍后再试！");
+		            }
 				});
 			};
 			
+			/* 搜索帖子 */
+			function foundTopic(){
+				var text = $('#foundTopicText').val();
+				var url = "${basePath}/bbs/admin/foundtopic";
+				$.ajax({
+					type : "post",
+					async : false,  //同步请求
+					url : url,
+					data :{
+						"TTopic":text
+					},
+					timeout:1000,
+					success:function(dates){
+						/* alert(dates); */
+						$("#mainContent *").remove();//清空之前的div
+						$("#mainContent").html(dates);//要刷新的div
+					},
+					error: function() {
+		               // alert("失败，请稍后再试！");
+		            }
+				});
+			};
+			/* 分栏显示 */
 		var vm = new Vue({
 			el:"#box",
 			data:{

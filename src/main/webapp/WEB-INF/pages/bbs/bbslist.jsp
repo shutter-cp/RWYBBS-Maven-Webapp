@@ -17,11 +17,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<meta http-equiv="expires" content="0">    
 	<meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
 	<meta http-equiv="description" content="This is my page">
-	<link rel="stylesheet" type="text/css" href="${basePath}/css/semantic.css"/>
 	<link rel="stylesheet" type="text/css" href="${basePath}/css/bbs/bbslist.css" />
-	<script src="${basePath}/js/jquery.min.js" type="text/javascript" charset="utf-8"></script>
-	<script src="${basePath}/js/semantic.js" type="text/javascript" charset="utf-8"></script>
-	<script src="${basePath}/js/vue1.js" type="text/javascript" charset="utf-8"></script>
+	<%@include file="/common/context.jsp" %>
 	<!--
 	<link rel="stylesheet" type="text/css" href="styles.css">
 	-->
@@ -32,7 +29,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		<!--  ==========  -->
 		<!--  =   标题      =  -->
 		<!--  ==========  -->
-		<div class="ui segment fixed basic menu">
+		<div class="ui segment fixed basic menu animated fadeInDown">
 			<div class="title-main">
 				<div class="ui image title-main-left">
 					<a href="http://47.95.220.233/RWY/index.jsp">
@@ -44,14 +41,14 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				</div>
 				<div class="ui text menu title-main-right">
 					<div class="right item">
-						<a href="#">
+						<a href="${basePath}/bbs/bbsuserindex">
 							<div class="but">
-								username
+								${username}
 							</div>
 						</a>
 					</div>
 					<div class="right item but">
-						<a href="#">
+						<a href="${basePath}/bbs/index">
 							<div class="but">
 								论坛
 							</div>
@@ -67,7 +64,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			<!--左边-->
 			<div class="four wide column">
 				<div class="ui sticky">
-					<div class="ui raised segment">
+					<div class="ui raised segment animated zoomInLeft">
 						<h3 class="listtitle"><i class="large red tasks icon"></i>板块导航</h3>
 							<p class="lists"><i class="circular inverted red feed icon"></i>全景业界资讯</p>
 							<c:forEach  items="${forumlist}" var="forumlist">
@@ -109,12 +106,12 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				</div>
 			</div>
 			<!--右边-->
-			<div class="twelve wide column" id="leftlist">
+			<div class="twelve wide column animated zoomInRight" id="leftlist">
 				<div class="ui raised segment ritghttitle">
 					<h3><i class="large red Browser icon"></i>${forum.getSName()}</h3>
-					<a href>
+					<!-- <a href> -->
 					<p class="Master"><i class="large red User icon"></i>版主：${forum.getUName()}</p>
-					</a><br/><br/>
+					<!-- </a> --><br/><br/>
 					<h5 class="Statement"><i class="large red comment outline icon"></i>${forum.getSStatement()}</h5>
 					<br/>
 					<p class="nodenum"><i class="large red Pointing Up icon"></i>点击量：${forum.getSClickCoount()}</p>
@@ -122,7 +119,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					
 				</div>
 				<div class="ui sticky">
-					<a href>
+					<a href="${basePath}/bbs/write">
 						<button class="ui red button addbutton">
 								<i class="add to calendar icon"></i>发布新帖子
 						</button>
@@ -131,16 +128,16 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				<div class="ui raised segment contents">
 					<c:forEach  items="${topic}" var="topic">
 						<div class="ui vertical segment onetopic">
-								<a href=>
+								<a href="${basePath}/bbs/note/${topic.getTID()}">
 									<h4>${topic.getTTopic()}</h4>
 								</a>
 								<p class="timeandauthor">
 									发帖时间：${topic.getTTime()}
 									<br/>
 									作者：
-									<a href=>
+									<!-- <a href=> -->
 										${topic.getUName()}
-									</a>
+									<!-- </a> -->
 								</p>
 						</div>
 					</c:forEach>
@@ -159,7 +156,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		<!--  ==========  -->
 		<!--  =   底部      =  -->
 		<!--  ==========  -->
-		<div class="ui segment basic vertical">
+		<div class="ui segment basic vertical animated zoomInUp">
 			<div class="ui divider"></div>
 			<div class="foot menu">
 				<div class="ui text left menu">

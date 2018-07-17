@@ -17,11 +17,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<meta http-equiv="expires" content="0">    
 	<meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
 	<meta http-equiv="description" content="This is my page">
-	<link rel="stylesheet" type="text/css" href="${basePath}/css/semantic.css"/>
 	<link rel="stylesheet" type="text/css" href="${basePath}/css/bbs/bbsadmin.css" />
-	<script src="${basePath}/js/jquery.min.js" type="text/javascript" charset="utf-8"></script>
-	<script src="${basePath}/js/semantic.js" type="text/javascript" charset="utf-8"></script>
-	<script src="${basePath}/js/vue1.js" type="text/javascript" charset="utf-8"></script>
+	<%@include file="/common/context.jsp" %>
 	<!--
 	<link rel="stylesheet" type="text/css" href="styles.css">
 	-->
@@ -40,20 +37,20 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					</a>
 				</div>
 				<div class="title-main-in">
-					<strong>管理员</strong>
+					<strong>版主</strong>
 				</div>
 				<div class="ui text menu title-main-right">
 					<div class="right item">
-						<a href="#">
+						<a href="http://47.95.220.233/RWY/index.jsp">
 							<div class="but">
-								username
+								${moderator}
 							</div>
 						</a>
 					</div>
 					<div class="right item but">
-						<a href="#">
+						<a href="http://47.95.220.233/RWY/index.jsp">
 							<div class="but">
-								论坛
+								RWY首页
 							</div>
 						</a>
 					</div>
@@ -73,8 +70,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			</div>
 			<div class="ui bottom attached segment">
 				<div class="ui transparent icon input searchbotton">
-			        <input type="text" placeholder="搜索帖子……">
-			        <i class="red search link icon"></i>
+			        <input id="foundTopicText" type="text" placeholder="搜索帖子……">
+			        <i onclick="foundTopic()" class="red search link icon"></i>
 			    </div>
 			   	<br /><br />
 			   <table class="ui celled table">
@@ -88,7 +85,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				    <th>审核状态</th>
 				    <th>操作</th>
 				  </tr></thead>
-				  <tbody>
+				  <tbody id="mainContent">
 				  <c:forEach  items="${twm}" var="twm">
 				    <tr>
 				      <td>${twm.getTID()}</td>
@@ -151,27 +148,32 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			$('.ui.dropdown').dropdown();
 		/* 删除帖子 */
 		function dt(TTopic,TID,UName){
-				$.ajax({
-					type:"post",
-					url:"${basePath}/bbs/admin/deletetopic",
-					data:{"TTopic":TTopic,
-					"TID":TID,
-					"UName":UName},
-					success:function(data){
-						if(data=="success"){
-						window.location.href = "${basePath}/bbs/moderator";
-						}else if(data=="isNull"){
-							alert("帖子已经删除");
-							$("#texts").val("");
+			var a = confirm('是否删除该帖子？');
+				if(a){
+					$.ajax({
+						type:"post",
+						url:"${basePath}/bbs/moderator/deletetopic",
+						data:{"TTopic":TTopic,
+						"TID":TID,
+						"UName":UName},
+						success:function(data){
+							if(data=="success"){
+							window.location.href = "${basePath}/bbs/moderator";
+							}else if(data=="isNull"){
+								alert("帖子已经删除");
+								$("#texts").val("");
+							}
 						}
-					}
-				});
-			};
+					});
+				}
+		};
 			/* 审核帖子 */
 		function ut(TTopic,TID,UName){
+			var a = confirm('是否审核该帖子？');
+			if(a){
 				$.ajax({
 					type:"post",
-					url:"${basePath}/bbs/admin/updatetopic",
+					url:"${basePath}/bbs/moderator/updatetopic",
 					data:{"TTopic":TTopic,
 					"TID":TID,
 					"UName":UName},
@@ -183,6 +185,29 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 							$("#texts").val("");
 						}
 					}
+				});
+			}
+		};
+			/* 搜索帖子 */
+			function foundTopic(){
+				var text = $('#foundTopicText').val();
+				var url = "${basePath}/bbs/moderator/foundtopicm";
+				$.ajax({
+					type : "post",
+					async : false,  //同步请求
+					url : url,
+					data :{
+						"TTopic":text
+					},
+					timeout:1000,
+					success:function(dates){
+						/* alert(dates); */
+						$("#mainContent *").remove();//清空之前的div
+						$("#mainContent").html(dates);//要刷新的div
+					},
+					error: function() {
+		               // alert("失败，请稍后再试！");
+		            }
 				});
 			};
 		var vm = new Vue({
