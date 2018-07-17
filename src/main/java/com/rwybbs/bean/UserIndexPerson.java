@@ -11,21 +11,24 @@ package com.rwybbs.bean;
 /**
  * 
  * 
- * Userindex
- * 创建人:Shanice
- * 时间：2018年7月15日-下午11:12:40 
+ * Userindex 创建人:Shanice 时间：2018年7月15日-下午11:12:40
+ * 
  * @version 1.0.0
  *
  */
-public class UserIndex {
+public class UserIndexPerson {
+	private Integer uid;
 	private String uname;
 	private String ubirthady;
 	private String usex;
 	private String uemail;
 	private Integer upoint;
-	private String ttopic;
-	private String tcontents;
-	private String ttime;
+	public Integer getUid() {
+		return uid;
+	}
+	public void setUid(Integer uid) {
+		this.uid = uid;
+	}
 	public String getUname() {
 		return uname;
 	}
@@ -56,23 +59,6 @@ public class UserIndex {
 	public void setUpoint(Integer upoint) {
 		this.upoint = upoint;
 	}
-	public String getTtopic() {
-		return ttopic;
-	}
-	public void setTtopic(String ttopic) {
-		this.ttopic = ttopic;
-	}
-	public String getTcontents() {
-		return tcontents;
-	}
-	public void setTcontents(String tcontents) {
-		this.tcontents = tcontents;
-	}
-	public String getTtime() {
-		return ttime;
-	}
-	public void setTtime(String ttime) {
-		this.ttime = ttime;
-	}
+
 
 }

@@ -10,10 +10,16 @@
  */
 package com.rwybbs.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.rwybbs.dao.RwyUserIndexDo;
+import com.rwybbs.bean.UserIndexArticle;
+import com.rwybbs.bean.UserIndexDeletes;
+import com.rwybbs.bean.UserIndexMessage;
+import com.rwybbs.bean.UserIndexPerson;
+import com.rwybbs.dao.RwyUserIndexDao;
 
 /**
  * 
@@ -28,6 +34,57 @@ import com.rwybbs.dao.RwyUserIndexDo;
 public class RwyUserIndexService {
 
 	@Autowired
-	private RwyUserIndexDo rwyuserindexDo;
+	private RwyUserIndexDao rwyUserIndexDao;
 	
+	/**
+	 * 
+	 * 接收个人信息的数据
+	 * 方法名：userIndexPerson
+	 * 创建人：Shanice
+	 * 时间：2018年7月17日-上午8:51:30 
+	 * 手机:15873158820
+	 * @param uname
+	 * @return UserIndexPerson
+	 * @exception 
+	 * @since  1.0.0
+	 */
+	public UserIndexPerson userIndexPerson(String uname){
+		return rwyUserIndexDao.userIndexPerson(uname);
+	}
+	
+	/**
+	 * 
+	 * 接收发表的帖子的数据
+	 * 方法名：userIndexArticle
+	 * 创建人：Shanice
+	 * 时间：2018年7月17日-上午8:53:09 
+	 * 手机:15873158820
+	 * @param tuid
+	 * @return UserIndexArticle
+	 * @exception 
+	 * @since  1.0.0
+	 */
+	public List<UserIndexArticle> userIndexArticle(Integer tuid){
+		return rwyUserIndexDao.userIndexArticle(tuid);
+	}
+	
+	/**
+	 * 
+	 * 接收我的消息的数据
+	 * 方法名：userIndexMessage
+	 * 创建人：Shanice
+	 * 时间：2018年7月17日-上午8:54:19 
+	 * 手机:15873158820
+	 * @param tid
+	 * @return UserIndexMessage
+	 * @exception 
+	 * @since  1.0.0
+	 */
+	public List<UserIndexMessage> userIndexMessage(Integer tid){
+		return rwyUserIndexDao.userIndexMessage(tid);
+	}
+	
+	public void deleteArticle(UserIndexDeletes user){
+		rwyUserIndexDao.deleteArticle(user);
+	}
 }
