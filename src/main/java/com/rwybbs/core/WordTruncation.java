@@ -52,4 +52,22 @@ public class WordTruncation {
 		return str.substring(0, 8)+"......";
 	}
 	
+	/**
+	 * 截取5个 
+	 * 方法名：truncation5
+	 * 创建人：chenPeng
+	 * 时间：2018年7月16日-下午6:23:18 
+	 * 手机:17673111810
+	 * @param str
+	 * @return String
+	 * @exception 
+	 * @since  1.0.0
+	 */
+	public String truncation5(String str){
+		if (str.length()<=5) {
+			return str;
+		}
+		return str.substring(0, 5)+"......";
+	}
+	
 }

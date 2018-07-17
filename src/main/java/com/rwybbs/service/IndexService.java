@@ -75,6 +75,30 @@ public class IndexService {
 		}
 		return topicList;
 	}
+	/**
+	 * 得到首页的热帖短的
+	 * 方法名：getIndexTopicMini
+	 * 创建人：chenPeng
+	 * 时间：2018年7月16日-下午6:22:27 
+	 * 手机:17673111810
+	 * @return List<IndexTopic>
+	 * @exception 
+	 * @since  1.0.0
+	 */
+	public List<IndexTopic> getIndexTopicMini(){
+		WordTruncation truncation = new WordTruncation();
+		//控制字数
+		List<IndexTopic> topicList = indexInitDao.getTopic();
+		for (IndexTopic indexTopic : topicList) {
+			indexTopic.setTtopic(
+					truncation.truncation5(
+							indexTopic.getTtopic()));
+		}
+		return topicList;
+	}
+	
+	
+	
 	
 	/**
 	 * 得到首页的全景业界资讯

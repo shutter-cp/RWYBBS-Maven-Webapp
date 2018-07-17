@@ -45,4 +45,30 @@ public interface LoginDao {
 	 * @since  1.0.0
 	 */
 	public String loginDo(UserAndPassword user);
+	
+	/**
+	 * 执行版主登陆
+	 * 方法名：moderatorLoginDo
+	 * 创建人：chenPeng
+	 * 时间：2018年7月16日-下午12:45:02 
+	 * 手机:17673111810
+	 * @param user
+	 * @return String
+	 * @exception 
+	 * @since  1.0.0
+	 */
+	public String moderatorLoginDo(UserAndPassword user);
+	
+	/**
+	 * 执行管理员登陆
+	 * 方法名：adminLoginDo
+	 * 创建人：chenPeng
+	 * 时间：2018年7月16日-下午12:45:20 
+	 * 手机:17673111810
+	 * @param user
+	 * @return String
+	 * @exception 
+	 * @since  1.0.0
+	 */
+	public String adminLoginDo(UserAndPassword user);
 }
