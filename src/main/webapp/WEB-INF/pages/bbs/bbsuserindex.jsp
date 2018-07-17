@@ -100,8 +100,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 							<table class="ui fixed table">
 								<thead>
 									<tr>
+										<th>编号</th>
 										<th>标题</th>
-										<th>正文</th>
 										<th>发帖时间</th>
 										<th>管理</th>
 									</tr>
@@ -109,8 +109,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 								<tbody>
 									<c:forEach items="${articleList}" var="article">
 										<tr>
+											<td>${article.getTid()}</td>
 											<td>${article.getTtopic()}</td>
-											<td>${article.getTcontents()}</td>
 											<td>${article.getTtime()}</td>
 											<td>
 												<button  class="ui button teal" >修改</button>
