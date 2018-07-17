@@ -1,4 +1,5 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%
 String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
@@ -45,12 +46,12 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					<div class="right item">
 						<a href="#">
 							<div class="but">
-								username
+								${username}
 							</div>
 						</a>
 					</div>
 					<div class="right item but">
-						<a href="#">
+						<a href="${basePath}/bbs/index">
 							<div class="but">
 								论坛
 							</div>
@@ -74,17 +75,20 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					</div>
 					<div class="thirteen wide conten">
 						<div class="ui header">
-							chouchouchou
+							${username}
 						</div>
 						<div class="ui text menu">
-							<a class="item">生日</a>
+							<a class="item">生日:${person.getUbirthady()}</a>
 							<div class="item">|</div>
-							<a class="item">性別 </a>
+							<a class="item">性別: 
+								<c:if test="${person.getUsex()=='1'}">男</c:if>
+								<c:if test="${person.getUsex()=='0'}">女</c:if>
+							</a>
 							<div class="item">|</div>
-							<a class="item">电子邮件</a>
+							<a class="item">电子邮件:${person.getUemail()}</a>
 						</div>	
 						<div class="ui divider"></div>
-							<p>U币：1000</p>
+							<p>U币:${person.getUpoint()}</p>
 					</div>
 				</div>
 			</div>
@@ -99,24 +103,21 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 										<th>标题</th>
 										<th>正文</th>
 										<th>发帖时间</th>
+										<th>管理</th>
 									</tr>
 								</thead>
 								<tbody>
-									<tr>
-										<td>约翰</td>
-										<td>已审核</td>
-										<td>John is an interesting boy but sometimes you don't really have enough room to describe everything you'd like</td>
-									</tr>
-									<tr>
-										<td>杰米</td>
-										<td>已审核</td>
-										<td>Jamie is a kind girl but sometimes you don't really have enough room to describe everything you'd like</td>
-									</tr>
-									<tr>
-										<td>吉尔</td>
-										<td>Denied</td>
-										<td>Jill is an alright girl but sometimes you don't really have enough room to describe everything you'd like</td>
-									</tr>
+									<c:forEach items="${articleList}" var="article">
+										<tr>
+											<td>${article.getTtopic()}</td>
+											<td>${article.getTcontents()}</td>
+											<td>${article.getTtime()}</td>
+											<td>
+												<button  class="ui button teal" >修改</button>
+												<button onclick="deletes('${article.getTid()}')" class="ui button red" >删除</button>
+											</td>
+										</tr>
+									</c:forEach>
 								</tbody>
 							</table>
 						</div>
@@ -125,13 +126,12 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 						<div class="ui raised very padded segment">
 							<h3 class="ui header"><i class="red announcement icon"></i>我的消息</h3>
 							<div class="ui very padded">
-								<p><i class="ui icon book"></i>fdkfdlk</p>
-								<p><i class="ui icon book"></i>fdkfdlk</p>
-								<p><i class="ui icon book"></i>fdkfdlk</p>
-								<p><i class="ui icon book"></i>fdkfdlk</p>
-								<p><i class="ui icon book"></i>fdkfdlk</p>
-								<p><i class="ui icon book"></i>fdkfdlk</p>
-								<p><i class="ui icon book"></i>fdkfdlk</p>
+								<c:forEach items="${messageList}" var="message">
+									<p>
+										<i class="ui icon book"></i>${message.getRcontent()}
+										<span style="float: right;">${message.getRtime()}</span>
+									</p>
+								</c:forEach>	
 							</div>
 						</div>
 					</div>
@@ -163,7 +163,22 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		</div>
 		
 		<script type="text/javascript">
-			
+			function deletes(no){
+				$.ajax({
+					type:"post",
+					url:"${basePath}/bbs/bbsuserindex/deletes",
+					data:{"no":no},
+					success:function(data){
+						if(data=="success"){
+							alert('确认删除?')
+							location.reload();
+						}else if(data=="isNull"){
+							alert("评论出错");
+							$("#texts").val("");
+						}
+					}
+				});
+			};
 		
 		</script>
 	</body>

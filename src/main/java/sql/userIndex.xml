@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+ <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"   
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.rwybbs.dao.RwyUserIndexDao">
+
+	<!-- 个人信息 -->
+	<select id="userIndexPerson"  parameterType="String"  resultType="com.rwybbs.bean.UserIndexPerson">
+		SELECT
+			uid,
+			uname,
+			DATE_FORMAT(ubirthady,'%y/%m/%d') ubirthady,
+			usex,
+			uemail,
+			upoint
+		FROM
+			bbsuser
+		WHERE
+			uname = #{uname};
+	</select>
+	
+	<!-- 发的帖子 -->
+	<select id="userIndexArticle"  parameterType="Integer"  resultType="com.rwybbs.bean.UserIndexArticle">
+		SELECT
+			tid,
+			ttopic,
+			tcontents,
+			DATE_FORMAT(ttime,'%y/%m/%d') ttime	
+		FROM
+			bbstopic
+		WHERE
+			tuid = #{tuid};
+	</select>
+	
+	<!-- 我的消息 -->
+	<select id="userIndexMessage"  parameterType="Integer"  resultType="com.rwybbs.bean.UserIndexMessage">
+		SELECT
+			rcontent,
+			DATE_FORMAT(rtime,'%y/%m/%d') rtime
+		FROM
+			bbsrplay
+		WHERE
+			bbsrplay.rsid IN(
+				SELECT
+					sid
+				FROM
+					bbsforum
+				WHERE
+					bbsforum.smasterid = #{tid}
+			  )
+	</select>
+	
+	<delete id="deleteArticle" parameterType="com.rwybbs.bean.UserIndexDeletes">
+		DELETE
+		FROM
+			bbstopic
+		WHERE
+			TID = #{tid} AND
+			TUID in (
+				SELECT 
+					UID
+				FROM
+					bbsuser
+				WHERE
+					UName = #{username}
+			)
+	</delete>
+</mapper>  
