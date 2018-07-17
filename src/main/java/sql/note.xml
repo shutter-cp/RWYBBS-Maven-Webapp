@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+ <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"   
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.rwybbs.dao.NoteDao">
+	<!-- 得到页面的主题部分 -->
+	<select id="getNoteMain"  parameterType="Integer"  resultType="com.rwybbs.bean.Note">
+		SELECT
+			tid,
+			ttopic,
+			tclickcoount,
+			DATE_FORMAT(ttime,"%Y/%m/%d") date,
+			tcontents,
+			u1.uhead guhead,
+			u1.uname guname,
+			u1.upoint gupoint
+		FROM
+			bbsuser u1
+			INNER JOIN bbstopic ON bbstopic.tuid = u1.uid
+		WHERE
+			tid = #{no};
+	</select>
+	
+	<!--  得到页面的评论部分-->
+	<select id="getNoteRplay"  parameterType="Integer"  resultType="com.rwybbs.bean.NoteRplay">
+		SELECT
+			uhead,
+			uname,
+			DATE_FORMAT(rtime,"%Y/%m/%d") date,
+			rcontent
+		FROM
+			bbsuser
+			INNER JOIN bbsrplay ON bbsuser.uid = bbsrplay.ruid
+		WHERE
+			rtid = #{no};
+	</select>
+	
+	<!-- 写评论 -->
+	<insert id="setNoteRplay" parameterType="com.rwybbs.bean.NoteRplayAdd" flushCache="true">  
+			INSERT
+			INTO
+				bbsrplay(
+					rtid,
+					rsid,
+					ruid,
+					rcontent,
+					rtime
+				)
+			VALUES(
+					#{rtid},
+					(SELECT
+						tsid
+						FROM
+							bbstopic
+						WHERE
+							tid=#{rtid}
+					),
+					(SELECT
+							uid
+						FROM
+							bbsuser
+						WHERE
+							uname=#{username}
+						),
+					 #{rcontent},
+					 NOW()
+			)
+	</insert> 
+	
+	<!-- 增加文章浏览量 -->
+	<update id="upDateTClickCoount" parameterType="Integer">
+		UPDATE
+			bbstopic
+		SET
+			TClickCoount=TClickCoount+1
+		WHERE
+			TID = #{no}
+	</update>
+	
+	<!-- 增加板块浏览量 --> 
+	<update id="upDateSClickCoount" parameterType="Integer">
+		UPDATE
+			bbsforum
+		SET
+			SClickCoount = SClickCoount+1
+		WHERE
+			SID in (
+			SELECT
+				TSID
+			FROM
+				bbstopic
+			WHERE
+				TID =  #{no}
+			)
+	</update>
+	
+</mapper>  

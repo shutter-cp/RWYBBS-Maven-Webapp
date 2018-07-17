@@ -30,39 +30,37 @@
 		
 		
 	<!-- 登陆拦截器 -->
-	<!-- <mvc:interceptors> -->
-		<!-- 设置login不拦截 拦截其他的 -->
-		<!-- <mvc:interceptor>
-			<mvc:mapping path="/addweight**"/>
-			<mvc:mapping path="/comment**"/>
-			<mvc:mapping path="/admin"/>
-			<mvc:exclude-mapping path="/login"/>
-			<bean class="com.looc.music.core.LoginCore"></bean>
-		</mvc:interceptor>
-	</mvc:interceptors> -->
-	<!-- 管理员拦截器 -->
-<!-- 	<mvc:interceptors>
+	<mvc:interceptors>
 		<mvc:interceptor>
-			<mvc:mapping path="/admin/admin"/>
-			<mvc:mapping path="/admin/admin/**"/>
-			<bean class="com.looc.music.core.AdminCore"></bean>
+			<mvc:mapping path="/bbs/**"/>
+			<mvc:exclude-mapping path="/bbs/moderator/**"/>
+			<mvc:exclude-mapping path="/bbs/admin/**"/>
+			<bean class="com.rwybbs.core.LoginCore"></bean>
+		</mvc:interceptor>
+	</mvc:interceptors>
+	<!-- 管理员拦截器 -->
+	<mvc:interceptors>
+		<mvc:interceptor>
+			<mvc:mapping path="/bbs/admin/**"/>
+			<mvc:mapping path="/bbs/admin**"/>
+			<bean class="com.rwybbs.core.AdminCore"></bean>
 		</mvc:interceptor>
 	</mvc:interceptors>
 	
 	<mvc:interceptors>
 		<mvc:interceptor>
-			<mvc:mapping path="/admin/author"/>
-			<mvc:mapping path="/admin/author/**"/>
-			<bean class="com.looc.music.core.AuthorCore"></bean>
+			<mvc:mapping path="/bbs/moderator/**"/>
+			<mvc:mapping path="/bbs/moderator**"/>
+			<bean class="com.rwybbs.core.ModeratorCore"></bean>
 		</mvc:interceptor>
-	</mvc:interceptors> -->
+	</mvc:interceptors>
 	
 	<!-- 文件上传 -->
-<!-- 	<bean id="multipartResolver" 
+	<bean id="multipartResolver" 
 		class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
 		<property name="maxUploadSize" value="1024288000"/>	
 		<property name="defaultEncoding" value="UTF-8"/>
-	</bean> -->
+	</bean>
 	
 </beans>
 

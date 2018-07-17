@@ -14,8 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.rwybbs.bean.MoneyUser;
-import com.rwybbs.bean.UserAndPassword;
-import com.rwybbs.dao.RwyMoneyDo;
+import com.rwybbs.dao.RwyMoneyDao;
 
 /**
  * 
@@ -28,13 +27,22 @@ import com.rwybbs.dao.RwyMoneyDo;
 @Service
 public class RwyMoneyService {
 	@Autowired
-	private RwyMoneyDo rwyMoneyDo;
+	private RwyMoneyDao rwyMoneyDao;
 	
-	public List<MoneyUser> MoneyService(String username,String password){
-		UserAndPassword andPassword = new UserAndPassword();
-		andPassword.setPassword(password);
-		andPassword.setUsername(username);
-		List<MoneyUser> userList = rwyMoneyDo.money(andPassword);
+	/**
+	 * 用户名密码检测
+	 * 方法名：MoneyService
+	 * 创建人：chenPeng
+	 * 时间：2018年7月13日-上午10:32:20 
+	 * 手机:17673111810
+	 * @param username
+	 * @param password
+	 * @return List<MoneyUser>
+	 * @exception 
+	 * @since  1.0.0
+	 */
+	public List<MoneyUser> MoneyService(String username){
+		List<MoneyUser> userList = rwyMoneyDao.money(username);
 		if (userList.size()==0) {
 			return null;
 		}

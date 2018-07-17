@@ -11,7 +11,6 @@ package com.rwybbs.dao;
 import java.util.List;
 
 import com.rwybbs.bean.MoneyUser;
-import com.rwybbs.bean.UserAndPassword;
 
 /**
  * 
@@ -21,7 +20,7 @@ import com.rwybbs.bean.UserAndPassword;
  * @version 1.0.0
  * 
  */
-public interface RwyMoneyDo {
+public interface RwyMoneyDao {
 	/**
 	 * 通过用户名获取到支付需要的信息
 	 * 方法名：money
@@ -33,5 +32,5 @@ public interface RwyMoneyDo {
 	 * @exception 
 	 * @since  1.0.0
 	 */
-	public List<MoneyUser> money(UserAndPassword user);
+	public List<MoneyUser> money(String username);
 }
