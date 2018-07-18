@@ -205,7 +205,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 							"temotion":temotion,
 							"sprofile":sprofile,
 							"text":text,
-							"username":${username}
+							"username":'${username}'
 						},
 						success:function(data){
 							if(data=="success"){
